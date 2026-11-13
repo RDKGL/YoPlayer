@@ -80,16 +80,6 @@
     <string name="edit_song_crop_dialog_hint">Dùng cử chỉ chụm và kéo để chọn góc chụp đẹp nhất.</string>
     <string name="edit_song_apply_cover_art">Áp dụng ảnh bìa</string>
     <string name="edit_song_unable_to_load_image">Không thể tải hình ảnh đã chọn</string>
-    <string name="edit_song_custom_metadata_heading">Siêu dữ liệu tùy chọn</string>
-    <string name="edit_song_custom_metadata_description">Đặt đánh giá từ 0–5 sao hoặc thêm các trường văn bản như MOOD, COMMENT, YEAR hoặc BPM.</string>
-    <string name="edit_song_rating">Đánh giá (0–5)</string>
-    <string name="edit_song_rating_not_set">Chưa đặt</string>
-    <string name="edit_song_custom_field_name">Tên trường</string>
-    <string name="edit_song_custom_field_value">Giá trị</string>
-    <string name="edit_song_add_custom_field">Thêm trường siêu dữ liệu</string>
-    <string name="edit_song_remove_custom_field">Xóa trường</string>
-    <string name="edit_song_custom_metadata_formats">Đánh giá và các trường tùy chỉnh có thể ghi vào tệp MP3, WAV, AIFF, FLAC, OGG, Opus, M4A, M4B và MP4.</string>
-    <string name="edit_song_custom_metadata_invalid">Vui lòng kiểm tra lại các trường siêu dữ liệu tùy chọn.</string>
 
     <string name="song_info_share_chooser_title">Chia sẻ tệp bài hát qua</string>
     <string name="cd_play_song_action">Phát bài hát</string>
@@ -103,7 +93,7 @@
     <string name="song_info_choose_tone">Đặt làm âm thanh</string>
     <string name="cd_choose_song_tone">Chọn cách dùng bài hát này làm âm thanh hệ thống</string>
     <string name="song_info_tone_picker_title">Dùng bài hát này làm</string>
-    <string name="song_info_tone_picker_body">Chọn nơi PixelPlayerOSS sẽ cài đặt âm thanh này.</string>
+    <string name="song_info_tone_picker_body">Chọn nơi YoPlayer sẽ cài đặt âm thanh này.</string>
     <string name="song_info_tone_ringtone_title">Nhạc chuông điện thoại</string>
     <string name="song_info_tone_ringtone_subtitle">Cuộc gọi đến</string>
     <string name="song_info_tone_notification_title">Âm thanh thông báo</string>
@@ -117,7 +107,7 @@
     <string name="song_info_tone_ringtone_label">nhạc chuông</string>
     <string name="song_info_tone_notification_label">âm thanh thông báo</string>
     <string name="song_info_tone_alarm_label">âm báo thức</string>
-    <string name="song_info_ringtone_permission_prompt">Bật quyền Thay đổi cài đặt hệ thống, sau đó quay lại PixelPlayerOSS để tự động hoàn tất.</string>
+    <string name="song_info_ringtone_permission_prompt">Bật quyền Thay đổi cài đặt hệ thống, sau đó quay lại YoPlayer để tự động hoàn tất.</string>
     <string name="song_info_ringtone_permission_missing">Quyền Thay đổi cài đặt hệ thống chưa được bật.</string>
     <string name="song_info_ringtone_local_only">Chỉ các bài hát cục bộ mới có thể dùng làm nhạc chuông.</string>
     <string name="song_info_ringtone_missing_file">Không thể chuẩn bị tệp âm thanh này để làm nhạc chuông.</string>
@@ -190,4 +180,14 @@
     <string name="playlist_saved_toast">Đã lưu</string>
     <string name="folder_state_excluded">Đã loại trừ</string>
     <string name="folder_state_included">Đã bao gồm</string>
+    <string name="edit_song_custom_metadata_heading">Siêu dữ liệu tùy chọn</string>
+    <string name="edit_song_custom_metadata_description">Đặt đánh giá từ 0–5 sao hoặc thêm các trường văn bản như MOOD, COMMENT, YEAR hoặc BPM.</string>
+    <string name="edit_song_rating">Đánh giá (0–5)</string>
+    <string name="edit_song_rating_not_set">Chưa đặt</string>
+    <string name="edit_song_custom_field_name">Tên trường</string>
+    <string name="edit_song_custom_field_value">Giá trị</string>
+    <string name="edit_song_add_custom_field">Thêm trường siêu dữ liệu</string>
+    <string name="edit_song_remove_custom_field">Xóa trường</string>
+    <string name="edit_song_custom_metadata_formats">Đánh giá và các trường tùy chỉnh có thể ghi vào tệp MP3, WAV, AIFF, FLAC, OGG, Opus, M4A, M4B và MP4.</string>
+    <string name="edit_song_custom_metadata_invalid">Vui lòng kiểm tra lại các trường siêu dữ liệu tùy chọn.</string>
 </resources>

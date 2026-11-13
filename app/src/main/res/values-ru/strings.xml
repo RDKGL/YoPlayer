@@ -229,8 +229,8 @@
     <string name="widget_bar_4x1_desc">Компактная панель плеера</string>
     <string name="widget_control_4x2_desc">Полное управление с перемешиванием и повтором</string>
     <string name="widget_grid_2x2_desc">Минималистичный квадратный плеер</string>
-    <string name="app_name_change_message">Теперь это приложение называется PixelPlayerOSS. Слушайте дальше!</string>
-    <string name="all_files_access_description">Чтобы редактировать метаданные треков (файлы .mp3), PixelPlayerOSS нужен специальный доступ ко всем файлам. Это позволяет напрямую изменять теги треков. Предоставьте это разрешение на следующем экране, чтобы включить редактирование метаданных.</string>
+    <string name="app_name_change_message">Теперь это приложение называется YoPlayer. Слушайте дальше!</string>
+    <string name="all_files_access_description">Чтобы редактировать метаданные треков (файлы .mp3), YoPlayer нужен специальный доступ ко всем файлам. Это позволяет напрямую изменять теги треков. Предоставьте это разрешение на следующем экране, чтобы включить редактирование метаданных.</string>
     <string name="cloud_download_action">Скачать</string>
     <string name="cloud_download_queued">В очереди</string>
     <string name="cloud_downloading">Скачивание…</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_match_score">Степень совпадения: %1$d%%</string>
     <string name="musicbrainz_applied">Идентификаторы MusicBrainz сохранены. Отсутствующий год и названия-заглушки были дополнены.</string>
     <string name="cloud_playlist_download">Скачать плейлист</string>
+    <string name="player_view_title">Вид плеера</string>
+    <string name="player_view_subtitle">Выравнивание и расположение названия песни</string>
+    <string name="player_title_alignment_title">Выравнивание названия</string>
+    <string name="player_title_position_title">Расположение блока</string>
+    <string name="player_title_align_left">Слева</string>
+    <string name="player_title_align_center">По центру</string>
+    <string name="player_title_pos_below">Под обложкой</string>
+    <string name="player_title_pos_above">Над обложкой</string>
+    <string name="usb_dac_exclusive_title">Доступ к лучшему звучанию через USB</string>
+    <string name="usb_dac_exclusive_subtitle">Прямой вывод аудио без передискретизации на USB ЦАП</string>
+
 </resources>

@@ -21,7 +21,7 @@
         <item quantity="other">Xóa %1$d khoảnh khắc?</item>
     </plurals>
     <string name="audio_bookmarks_delete_moments_message">Các khoảnh khắc đã chọn sẽ bị xóa vĩnh viễn.</string>
-    <string name="easter_egg_thank_you">Cảm ơn bạn đã sử dụng PixelPlayerOSS! ❤️</string>
+    <string name="easter_egg_thank_you">Cảm ơn bạn đã sử dụng YoPlayer! ❤️</string>
     <string name="word_delimiter_section_title">Từ phân tách hiện tại</string>
     <string name="word_delimiter_section_subtitle">Các từ khóa này tách tên nghệ sĩ khi có khoảng trắng hai bên. Không phân biệt hoa thường. Nhấn để xóa.</string>
     <string name="word_delimiter_empty">Chưa cấu hình từ phân tách nào</string>
@@ -149,8 +149,6 @@
     <string name="cd_generic_artist">Nghệ sĩ</string>
     <string name="cd_play_album">Phát album</string>
     <string name="cd_shuffle_play_album">Phát ngẫu nhiên album</string>
-    <string name="album_cover_for">Ảnh bìa album của %1$s</string>
-    <string name="album_detail_meta_line">%1$s • %2$s</string>
     <string name="detail_hero_shuffle">Xáo trộn</string>
     <string name="detail_hero_play">Phát</string>
     <string name="detail_hero_pause">Tạm dừng</string>
@@ -163,6 +161,8 @@
     <string name="detail_hero_album_count_one">1 album</string>
     <string name="detail_hero_duration_minutes">%1$d phút</string>
     <string name="detail_hero_duration_hours">%1$d giờ %2$d phút</string>
+    <string name="album_cover_for">Ảnh bìa album của %1$s</string>
+    <string name="album_detail_meta_line">%1$s • %2$s</string>
     <string name="mashup_cd_play_pause">Phát hoặc Tạm dừng</string>
     <string name="cd_song_cover">Ảnh bìa bài hát</string>
     <string name="crash_report_title">Đã xảy ra sự cố</string>
@@ -172,7 +172,7 @@
     <string name="crash_report_stack_preview_label">Xem trước nhật ký lỗi (Stack trace):</string>
     <string name="crash_report_clipboard_label">Sao chép nhật ký lỗi vào bộ nhớ tạm</string>
     <string name="toast_crash_log_copied">Đã sao chép nhật ký lỗi</string>
-    <string name="crash_report_share_subject">Báo cáo sự cố PixelPlayerOSS</string>
+    <string name="crash_report_share_subject">Báo cáo sự cố YoPlayer</string>
     <string name="crash_report_share_chooser">Chia sẻ nhật ký sự cố qua</string>
     <string name="action_copy">Sao chép</string>
     <string name="action_share">Chia sẻ</string>
@@ -192,12 +192,15 @@
     <string name="browse_by_genre">Khám phá theo thể loại</string>
     <string name="no_genres_available">Không có thể loại nào</string>
     <string name="about_tagline">Trình phát nhạc tinh tế, tự do và mạnh mẽ.</string>
+    <string name="about_link_website_title">Trang web chính thức</string>
+    <string name="about_link_telegram_channel_title">Kênh Telegram</string>
+    <string name="about_link_telegram_creator_title">Telegram của tác giả</string>
     <string name="about_version_format">Phiên bản %1$s</string>
     <string name="about_contributions_format">%1$d đóng góp</string>
     <string name="screen_about">Thông tin ứng dụng</string>
     <string name="about_maintainer_title">Người duy trì dự án</string>
     <string name="about_maintainer_subtitle">Duy trì bản FOSS và bản gốc.</string>
-    <string name="about_project_title">Dự án PixelPlayerOSS</string>
+    <string name="about_project_title">Dự án YoPlayer</string>
     <string name="about_project_subtitle">Mã nguồn mở hoàn toàn theo giấy phép GPL.</string>
     <string name="about_link_source_title">Mã nguồn GitHub</string>
     <string name="about_link_fdroid_title">F-Droid</string>
@@ -227,7 +230,7 @@
     <string name="about_signal_community_first">Ưu tiên cộng đồng</string>
     <string name="about_signal_material3">Thiết kế Material You</string>
     <string name="about_support_eyebrow">Hỗ trợ dự án</string>
-    <string name="about_support_title">Ủng hộ PixelPlayerOSS</string>
+    <string name="about_support_title">Ủng hộ YoPlayer</string>
     <string name="about_support_body">Giúp duy trì, đánh giá và kiểm thử phiên bản FOSS trên các thiết bị Android thực tế.</string>
     <string name="about_support_chip_foss">FOSS</string>
     <string name="about_support_chip_ci">Máy chủ CI/CD</string>
@@ -254,7 +257,7 @@
     <string name="dash_libraries_more_count">+%1$d thư viện khác</string>
     <string name="dash_libraries_change">Thay đổi</string>
     <string name="dash_libraries_load_failed">Không thể tải danh sách thư viện</string>
-    <string name="dash_libraries_sheet_subtitle">Chọn các thư viện bạn muốn đồng bộ vào PixelPlayerOSS.</string>
+    <string name="dash_libraries_sheet_subtitle">Chọn các thư viện bạn muốn đồng bộ vào YoPlayer.</string>
     <string name="dash_libraries_all_subtitle">Đồng bộ tất cả các thư viện âm nhạc có sẵn.</string>
     <string name="dash_libraries_folder_subtitle">Đồng bộ theo thư mục cụ thể.</string>
     <string name="dash_libraries_sync_needed">Cần đồng bộ để cập nhật</string>

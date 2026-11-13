@@ -38,6 +38,9 @@
     <string name="about_support_cta">Dukung di GitHub</string>
     <string name="about_support_eyebrow">GitHub Sponsors</string>
     <string name="about_tagline">Musik lokal lebih dulu, streaming mandiri, dan sentuhan Material 3 dalam satu pemutar FOSS.</string>
+    <string name="about_link_website_title">Situs Web Resmi</string>
+    <string name="about_link_telegram_channel_title">Saluran Telegram</string>
+    <string name="about_link_telegram_creator_title">Telegram Pembuat</string>
     <string name="about_version_format">Versi v%1$s</string>
     <string name="accounts_unable_open_screen">Tidak dapat membuka layar ini sekarang.</string>
     <string name="action_copy">Salin</string>
@@ -231,7 +234,7 @@
     <string name="setup_navbar_footer">Anda dapat mengubah ini nanti di Pengaturan &gt; Tampilan &gt; Gaya Navbar.</string>
     <string name="setup_permission_alarms_title">Alarm &amp; Pengingat</string>
     <string name="setup_battery_optimization_title">Optimalisasi Baterai</string>
-    <string name="setup_battery_optimization_description">Beberapa perangkat Android secara agresif mematikan aplikasi latar belakang. Nonaktifkan optimalisasi baterai untuk PixelPlayerOSS untuk mencegah gangguan pemutaran yang tidak terduga.</string>
+    <string name="setup_battery_optimization_description">Beberapa perangkat Android secara agresif mematikan aplikasi latar belakang. Nonaktifkan optimalisasi baterai untuk YoPlayer untuk mencegah gangguan pemutaran yang tidak terduga.</string>
     <string name="setup_disable_battery_optimization">Nonaktifkan Optimalisasi</string>
     <string name="setup_permission_granted">Izin Diberikan</string>
     <string name="setup_permission_media_title">Izin Media</string>
@@ -279,13 +282,13 @@
     <string name="word_delimiter_toast_invalid">Sudah ada atau tidak valid</string>
     <string name="word_delimiter_toast_reset">Pemisah kata direset ke default</string>
     <string name="word_delimiters_screen_title">Pemisah Kata</string>
-    <string name="easter_egg_thank_you">Terima kasih telah menggunakan PixelPlayerOSS!</string>
-    <string name="setup_external_services_subtitle">PixelPlayerOSS bekerja secara offline secara default. Aktifkan hanya pencarian yang Anda inginkan.</string>
-    <string name="setup_permission_media_description">PixelPlayerOSS memerlukan akses ke file audio Anda untuk membangun pustaka musik Anda.</string>
-    <string name="setup_permission_alarms_description">Opsional, tetapi disarankan jika Anda menggunakan Timer Tidur dan ingin PixelPlayerOSS menghentikan pemutaran tepat waktu.</string>
-    <string name="setup_backup_have_description">Jika Anda sudah memiliki cadangan PixelPlayerOSS, pulihkan sekarang dan lewati sebagian besar penyiapan lainnya di perangkat ini.</string>
-    <string name="setup_theme_dark_description">Tampilan gelap Material 3 bawaan untuk PixelPlayerOSS.</string>
-    <string name="home_empty_placeholder_subtitle">Mix Anda akan muncul di sini saat PixelPlayerOSS menemukan lagu atau menyinkronkan sumber.</string>
-    <string name="crash_report_share_subject">Laporan crash PixelPlayerOSS</string>
-    <string name="about_support_title">Dukung PixelPlayerOSS</string>
+    <string name="easter_egg_thank_you">Terima kasih telah menggunakan YoPlayer!</string>
+    <string name="setup_external_services_subtitle">YoPlayer bekerja secara offline secara default. Aktifkan hanya pencarian yang Anda inginkan.</string>
+    <string name="setup_permission_media_description">YoPlayer memerlukan akses ke file audio Anda untuk membangun pustaka musik Anda.</string>
+    <string name="setup_permission_alarms_description">Opsional, tetapi disarankan jika Anda menggunakan Timer Tidur dan ingin YoPlayer menghentikan pemutaran tepat waktu.</string>
+    <string name="setup_backup_have_description">Jika Anda sudah memiliki cadangan YoPlayer, pulihkan sekarang dan lewati sebagian besar penyiapan lainnya di perangkat ini.</string>
+    <string name="setup_theme_dark_description">Tampilan gelap Material 3 bawaan untuk YoPlayer.</string>
+    <string name="home_empty_placeholder_subtitle">Mix Anda akan muncul di sini saat YoPlayer menemukan lagu atau menyinkronkan sumber.</string>
+    <string name="crash_report_share_subject">Laporan crash YoPlayer</string>
+    <string name="about_support_title">Dukung YoPlayer</string>
 </resources>

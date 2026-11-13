@@ -1,79 +1,47 @@
-# Contributing to PixelPlayerOSS
+# Contributing to YoPlayer 🎵
 
-Thanks for your interest in improving PixelPlayerOSS! This guide covers the
-conventions that aren't obvious from the code alone. For a deeper architectural
-overview, see [CLAUDE.md](CLAUDE.md) (written for AI assistants but accurate for
-humans too).
+Thanks for your interest in improving YoPlayer! This guide covers the
+conventions and steps for contributing to the project.
 
-## Getting started
+## Getting Started
 
 ```sh
-git clone https://github.com/PixelPlayerHQ/PixelPlayerOSS.git
-cd PixelPlayerOSS
+git clone https://github.com/RDKGL/YoPlayer.git
+cd YoPlayer
 
-# Universal debug APK for local installation
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew :app:assembleDebug -Ppixelplayer.enableAbiSplits=false
+# Build Release APK
+./gradlew :app:assembleRelease
 ```
 
 Requirements: **JDK 21**, Android **compile/target SDK 37**, min SDK 30 (Android 11+).
-Kotlin code style is `official`.
 
-## Local checks before opening a PR
+## Local Verification Before Submitting PRs
 
-Please run these and include the results in your PR description:
-
-```sh
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew :app:compileDebugKotlin
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew :app:lintDebug
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew :app:testDebugUnitTest
-```
-
-Run a single test class/method:
+Run local verification tasks before opening a PR:
 
 ```sh
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew :app:testDebugUnitTest \
-  --tests "com.lostf1sh.pixelplayeross.SomeTestClass.someMethod"
+./gradlew :app:compileDebugKotlin
+./gradlew :app:lintDebug
+./gradlew :app:testDebugUnitTest
 ```
 
-> Unit tests use **JUnit Jupiter** (`useJUnitPlatform()`), not JUnit 4 — use
-> `org.junit.jupiter.api.Test`, not `org.junit.Test`.
+Run a specific unit test class:
 
-## Conventions that matter
+```sh
+./gradlew :app:testDebugUnitTest --tests "open.yo.player.SomeTestClass"
+```
 
-These are easy to get wrong and will come up in review:
+> Unit tests use **JUnit 5 (JUnit Jupiter)** (`useJUnitPlatform()`). Use `org.junit.jupiter.api.Test`.
 
-- **Slice `PlayerUiState`, never collect the whole thing.** It updates on every
-  position tick, so collecting all ~30 fields in a screen causes recomposition
-  storms. Map to a small slice + `distinctUntilChanged()`. The reference pattern
-  is `PlayerUiSheetSliceV2` in `UnifiedPlayerSheetV2`. See
-  [app/performance_analysis.md](app/performance_analysis.md) before touching list
-  rendering, animations, or `PlayerUiState`.
-- **Prefer `ImmutableList<T>` over `List<T>` in `@Composable` params** for
-  strong-skipping (`kotlinx.collections.immutable`). But `.toImmutableList()` is
-  `O(n)` — don't call it on every recomposition. New widely-used domain models go
-  in `app/compose_stability.conf`.
-- **Navigate with `navController.navigateSafely(...)`** (from
-  `NavControllerExtensions.kt`), never `navController.navigate(...)` directly — it
-  retries on the `IllegalStateException` thrown by rapid taps.
-- **Log with Timber, not `android.util.Log`.** Debug builds plant a `DebugTree`;
-  release uses `ReleaseTree` (WARN/ERROR/WTF only). Raw `Log.x` bypasses the
-  release filter.
-- **Room schema changes require a migration** (schemas are exported to
-  `app/schemas`). Destructive migration is only allowed in debug builds.
-- **`@Singleton` is already the dominant scope** — be cautious about adding more
-  (flagged as a low-end memory risk in the perf audit). Prefer `@ViewModelScoped`
-  for single-consumer state.
-- Keep user-facing strings in `res/values/strings*.xml` (`stringResource(...)`),
-  not hardcoded in Composables.
+## Core Code Conventions
 
-## Pull requests
+- **State Slicing**: Slice `PlayerUiState` rather than observing the whole state to avoid recomposition loops on playback ticks.
+- **Immutable Collections**: Prefer `ImmutableList<T>` over `List<T>` for Compose parameters (`kotlinx.collections.immutable`).
+- **Safe Navigation**: Use `navController.navigateSafely(...)` to prevent navigation state crashes on fast taps.
+- **Logging**: Use Timber (`Timber.d()`, `Timber.e()`) instead of `android.util.Log`.
+- **String Resources**: Keep all user-facing strings in `res/values*/strings.xml`.
 
-- Keep changes focused; one logical change per PR.
-- Describe what changed and why, and include build/test results.
-- Do **not** add a `Co-Authored-By:` trailer to commits or PR bodies.
+## Pull Requests & Issues
 
-## Reporting bugs
-
-Open an issue using the bug-report template. Please include your app version,
-device/Android version, and which music source (local / Navidrome / Jellyfin) is
-involved.
+- Describe changes clearly and verify local test suites pass before submitting PRs.
+- License: GNU General Public License v3.0 (GPL-3.0).

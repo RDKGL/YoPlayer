@@ -229,8 +229,8 @@
     <string name="widget_bar_4x1_desc">Bilah pemutar ringkas</string>
     <string name="widget_control_4x2_desc">Kontrol penuh dengan acak dan ulangi</string>
     <string name="widget_grid_2x2_desc">Pemutar kotak minimalis</string>
-    <string name="app_name_change_message">Aplikasi ini sekarang bernama PixelPlayerOSS. Selamat mendengarkan!</string>
-    <string name="all_files_access_description">Untuk mengedit metadata lagu (file .mp3), PixelPlayerOSS memerlukan akses khusus ke semua file. Ini memungkinkan kami mengubah tag trek secara langsung. Harap berikan izin ini di layar berikutnya untuk mengaktifkan pengeditan metadata.</string>
+    <string name="app_name_change_message">Aplikasi ini sekarang bernama YoPlayer. Selamat mendengarkan!</string>
+    <string name="all_files_access_description">Untuk mengedit metadata lagu (file .mp3), YoPlayer memerlukan akses khusus ke semua file. Ini memungkinkan kami mengubah tag trek secara langsung. Harap berikan izin ini di layar berikutnya untuk mengaktifkan pengeditan metadata.</string>
     <string name="cloud_download_action">Unduh</string>
     <string name="cloud_download_queued">Dalam antrean</string>
     <string name="cloud_downloading">Mengunduh…</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_match_score">Tingkat kecocokan: %1$d%%</string>
     <string name="musicbrainz_applied">ID MusicBrainz disimpan. Tahun yang hilang dan nama placeholder telah dilengkapi.</string>
     <string name="cloud_playlist_download">Unduh playlist</string>
+    <string name="player_view_title">Tampilan pemutar</string>
+    <string name="player_view_subtitle">Rataan dan posisi judul lagu</string>
+    <string name="player_title_alignment_title">Rataan judul</string>
+    <string name="player_title_position_title">Posisi judul</string>
+    <string name="player_title_align_left">Kiri</string>
+    <string name="player_title_align_center">Tengah</string>
+    <string name="player_title_pos_below">Di bawah sampul</string>
+    <string name="player_title_pos_above">Di atas sampul</string>
+    <string name="usb_dac_exclusive_title">Akses ke suara lebih baik via USB</string>
+    <string name="usb_dac_exclusive_subtitle">Output audio langsung tanpa resampling ke USB DAC</string>
+
 </resources>

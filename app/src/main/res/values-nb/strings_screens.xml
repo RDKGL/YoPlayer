@@ -38,6 +38,9 @@
     <string name="about_support_cta">Støtt på GitHub</string>
     <string name="about_support_eyebrow">GitHub Sponsors</string>
     <string name="about_tagline">Lokal musikk først, selvhostet strømming og Material 3-håndverk i én FOSS-spiller.</string>
+    <string name="about_link_website_title">Offisiell nettside</string>
+    <string name="about_link_telegram_channel_title">Telegram-kanal</string>
+    <string name="about_link_telegram_creator_title">Skaperens Telegram</string>
     <string name="about_version_format">Versjon v%1$s</string>
     <string name="accounts_unable_open_screen">Kan ikke åpne denne skjermen akkurat nå.</string>
     <string name="action_copy">Kopier</string>
@@ -279,13 +282,13 @@
     <string name="word_delimiter_toast_invalid">Finnes allerede eller er ugyldig</string>
     <string name="word_delimiter_toast_reset">Orddelimitere tilbakestilt til standard</string>
     <string name="word_delimiters_screen_title">Orddelimitere</string>
-    <string name="easter_egg_thank_you">Takk for at du bruker PixelPlayerOSS!</string>
-    <string name="setup_external_services_subtitle">PixelPlayerOSS fungerer offline som standard. Aktiver bare oppslagene du vil ha.</string>
-    <string name="setup_permission_media_description">PixelPlayerOSS trenger tilgang til lydfilene dine for å bygge musikkbiblioteket ditt.</string>
-    <string name="setup_permission_alarms_description">Valgfritt, men anbefalt hvis du bruker Sleep timer og vil at PixelPlayerOSS skal stoppe avspillingen nøyaktig i tide.</string>
-    <string name="setup_backup_have_description">Hvis du allerede har en PixelPlayerOSS-sikkerhetskopi, kan du gjenopprette den nå og hoppe over det meste av resten av oppsettet på denne enheten.</string>
-    <string name="setup_theme_dark_description">Standard mørkt Material 3-utseende for PixelPlayerOSS.</string>
-    <string name="home_empty_placeholder_subtitle">Miksen din vises her når PixelPlayerOSS finner sanger eller synkroniserer en kilde.</string>
-    <string name="crash_report_share_subject">Krasjrapport for PixelPlayerOSS</string>
-    <string name="about_support_title">Støtt PixelPlayerOSS</string>
+    <string name="easter_egg_thank_you">Takk for at du bruker YoPlayer!</string>
+    <string name="setup_external_services_subtitle">YoPlayer fungerer offline som standard. Aktiver bare oppslagene du vil ha.</string>
+    <string name="setup_permission_media_description">YoPlayer trenger tilgang til lydfilene dine for å bygge musikkbiblioteket ditt.</string>
+    <string name="setup_permission_alarms_description">Valgfritt, men anbefalt hvis du bruker Sleep timer og vil at YoPlayer skal stoppe avspillingen nøyaktig i tide.</string>
+    <string name="setup_backup_have_description">Hvis du allerede har en YoPlayer-sikkerhetskopi, kan du gjenopprette den nå og hoppe over det meste av resten av oppsettet på denne enheten.</string>
+    <string name="setup_theme_dark_description">Standard mørkt Material 3-utseende for YoPlayer.</string>
+    <string name="home_empty_placeholder_subtitle">Miksen din vises her når YoPlayer finner sanger eller synkroniserer en kilde.</string>
+    <string name="crash_report_share_subject">Krasjrapport for YoPlayer</string>
+    <string name="about_support_title">Støtt YoPlayer</string>
 </resources>

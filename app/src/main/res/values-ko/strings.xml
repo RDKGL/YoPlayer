@@ -229,8 +229,8 @@
     <string name="widget_bar_4x1_desc">컴팩트 플레이어 바</string>
     <string name="widget_control_4x2_desc">셔플 및 반복 기능이 포함된 전체 컨트롤</string>
     <string name="widget_grid_2x2_desc">미니멀한 사각형 플레이어</string>
-    <string name="app_name_change_message">이제 이 앱은 PixelPlayerOSS입니다. 계속 음악을 즐겨 보세요!</string>
-    <string name="all_files_access_description">곡 메타데이터(.mp3 파일)를 편집하려면 PixelPlayerOSS에 모든 파일에 대한 특별 접근 권한이 필요합니다. 이 권한이 있어야 트랙 태그를 직접 수정할 수 있습니다. 다음 화면에서 이 권한을 허용하여 메타데이터 편집을 활성화하세요.</string>
+    <string name="app_name_change_message">이제 이 앱은 YoPlayer입니다. 계속 음악을 즐겨 보세요!</string>
+    <string name="all_files_access_description">곡 메타데이터(.mp3 파일)를 편집하려면 YoPlayer에 모든 파일에 대한 특별 접근 권한이 필요합니다. 이 권한이 있어야 트랙 태그를 직접 수정할 수 있습니다. 다음 화면에서 이 권한을 허용하여 메타데이터 편집을 활성화하세요.</string>
     <string name="cloud_download_action">다운로드</string>
     <string name="cloud_download_queued">대기 중</string>
     <string name="cloud_downloading">다운로드 중…</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_match_score">일치도: %1$d%%</string>
     <string name="musicbrainz_applied">MusicBrainz 식별자가 저장되었습니다. 누락된 연도와 임시 이름이 보완되었습니다.</string>
     <string name="cloud_playlist_download">플레이리스트 다운로드</string>
+    <string name="player_view_title">플레이어 보기</string>
+    <string name="player_view_subtitle">트랙 제목 정렬 및 위치</string>
+    <string name="player_title_alignment_title">제목 정렬</string>
+    <string name="player_title_position_title">제목 위치</string>
+    <string name="player_title_align_left">왼쪽</string>
+    <string name="player_title_align_center">중앙</string>
+    <string name="player_title_pos_below">커버 아래</string>
+    <string name="player_title_pos_above">커버 위</string>
+    <string name="usb_dac_exclusive_title">USB를 통한 더 나은 음질 접근</string>
+    <string name="usb_dac_exclusive_subtitle">USB DAC로 리샘플링 없는 직접 오디오 출력</string>
+
 </resources>

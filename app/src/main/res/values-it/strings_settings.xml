@@ -280,7 +280,7 @@
     <string name="toast_regenerated_palettes_partial">Rigenerate %1$d di %2$d palette copertine album</string>
     <string name="toast_stats_regeneration_started">Rigenerazione statistiche avviata</string>
     <string name="working_ellipsis">Elaborazione…</string>
-    <string name="setcat_about_pixelplayer_title">Informazioni su PixelPlayerOSS</string>
+    <string name="setcat_about_pixelplayer_title">Informazioni su YoPlayer</string>
     <string name="updates_title">Aggiornamenti</string>
     <string name="updates_settings_subtitle">Controllo versioni e canale di rilascio</string>
     <string name="updates_check_row_title">Cerca aggiornamenti</string>
@@ -302,7 +302,7 @@
     <string name="updates_status_reinstall_signature">La versione %1$s non può essere installata sopra questa build: è firmata con una chiave diversa o usa un nome di pacchetto diverso (ad esempio una build di debug).</string>
     <string name="updates_status_downloading">Scaricamento di %1$s…</string>
     <string name="updates_status_downloading_progress">Scaricamento di %1$s… %2$d%%</string>
-    <string name="updates_status_permission">Consenti a PixelPlayerOSS di installare app per completare l\'aggiornamento a %1$s.</string>
+    <string name="updates_status_permission">Consenti a YoPlayer di installare app per completare l\'aggiornamento a %1$s.</string>
     <string name="updates_status_confirm">Conferma l\'installazione di %1$s nella richiesta di sistema.</string>
     <string name="updates_status_installing">Installazione di %1$s…</string>
     <string name="updates_error_check">Impossibile raggiungere il server degli aggiornamenti. Controlla la connessione e riprova.</string>
@@ -323,7 +323,7 @@
     <string name="updates_switch_dialog_title">Reinstallazione necessaria</string>
     <string name="updates_switch_dialog_body">Le build stabili provengono da F-Droid e quelle alpha da GitHub. Sono firmate con chiavi diverse, quindi Android non può aggiornare l\'una con l\'altra. La disinstallazione elimina i dati dell\'app, quindi esegui prima un backup.</string>
     <string name="updates_switch_step_backup">1. Crea un backup e salva il file fuori dall\'app.</string>
-    <string name="updates_switch_step_download_stable">2. Installa F-Droid se non ce l\'hai e apri PixelPlayerOSS da lì.</string>
+    <string name="updates_switch_step_download_stable">2. Installa F-Droid se non ce l\'hai e apri YoPlayer da lì.</string>
     <string name="updates_switch_step_download_alpha">2. Scarica l\'APK %1$s.</string>
     <string name="updates_switch_step_uninstall">3. Disinstalla questa app, installa la nuova build e ripristina il tuo backup.</string>
     <string name="updates_switch_action_backup">Crea backup</string>
@@ -333,8 +333,8 @@
     <string name="updates_switch_action_close">Chiudi</string>
     <string name="updates_notification_channel">Aggiornamenti dell\'app</string>
     <string name="updates_notification_title">Aggiornamento disponibile</string>
-    <string name="updates_notification_text">PixelPlayerOSS %1$s è pronto per l\'installazione.</string>
-    <string name="updates_notification_confirm_title">Completa l\'aggiornamento di PixelPlayerOSS</string>
+    <string name="updates_notification_text">YoPlayer %1$s è pronto per l\'installazione.</string>
+    <string name="updates_notification_confirm_title">Completa l\'aggiornamento di YoPlayer</string>
     <string name="updates_notification_confirm_text">Tocca per confermare l\'installazione.</string>
     <string name="setcat_m3u_sync_section">Sincronizzazione playlist</string>
     <string name="setcat_m3u_sync_title">Sincronizzazione M3U automatica</string>
@@ -343,24 +343,10 @@
     <string name="setcat_m3u_sync_selected_folder">cartella selezionata</string>
     <string name="setcat_m3u_sync_now_title">Sincronizza le playlist ora</string>
     <string name="setcat_m3u_sync_now_subtitle">Importa ed esporta le modifiche senza sovrascrivere i conflitti</string>
-    <string name="setcat_m3u_sync_result">%1$d modificati · %2$d conflitti · %3$d voci non risolte</string>
+    <string name="setcat_m3u_sync_result">%1$d modificate · %2$d conflitti · %3$d voci non risolte</string>
     <string name="setcat_global_now_playing_theme_title">Usa i colori del brano in riproduzione in tutta l\'app</string>
-    <string name="setcat_global_now_playing_theme_subtitle">Colora l\'intera app in base alla copertina del brano corrente. Le modalità chiara e scura vengono comunque rispettate.</string>
-    <string name="setcat_keep_screen_awake_title">Mantieni lo schermo acceso durante la riproduzione</string>
-    <string name="setcat_keep_screen_awake_subtitle">Impedisce allo schermo di spegnersi mentre la musica è in riproduzione e l\'app è visibile.</string>
+    <string name="setcat_global_now_playing_theme_subtitle">Colora l\'intera app usando la copertina del brano corrente. Le modalità chiara e scura continuano ad applicarsi.</string>
+    <string name="setcat_keep_screen_awake_title">Tieni lo schermo attivo durante la riproduzione</string>
+    <string name="setcat_keep_screen_awake_subtitle">Impedisce allo schermo di spegnersi quando la musica è in riproduzione e l\'app è visibile.</string>
     <string name="setcat_playback_behavior">Riproduzione</string>
-    <string name="setcat_autoplay_on_skip_title">Riproduzione automatica al salto</string>
-    <string name="setcat_autoplay_on_skip_subtitle">Avvia automaticamente la riproduzione quando passi a un altro brano mentre è in pausa.</string>
-    <string name="playback_speed_description">L\'intonazione resta invariata. Si applica a tutto ciò che ascolti.</string>
-    <string name="playback_speed_value">%1$s×</string>
-    <string name="playback_speed_state_description">velocità %1$s×</string>
-    <string name="playback_speed_decrease">Riduci velocità di riproduzione</string>
-    <string name="playback_speed_increase">Aumenta velocità di riproduzione</string>
-    <string name="playback_speed_presets">Preset</string>
-    <string name="playback_speed_custom_action">Inserisci velocità esatta</string>
-    <string name="playback_speed_custom_title">Velocità di riproduzione esatta</string>
-    <string name="playback_speed_custom_field_label">Velocità</string>
-    <string name="playback_speed_custom_supporting">Da %1$s× a %2$s×, fino a due decimali</string>
-    <string name="playback_speed_custom_error">Inserisci una velocità da %1$s× a %2$s×</string>
-    <string name="playback_speed_multiplier_suffix">×</string>
 </resources>

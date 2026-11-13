@@ -145,7 +145,7 @@
     <string name="device_capabilities_report_copy">Sao chép</string>
     <string name="device_capabilities_report_share">Chia sẻ</string>
     <string name="device_capabilities_report_copied">Đã sao chép báo cáo vào bộ nhớ tạm</string>
-    <string name="device_capabilities_report_share_title">Báo cáo hiệu năng PixelPlayer</string>
+    <string name="device_capabilities_report_share_title">Báo cáo hiệu năng YoPlayer</string>
     <string name="device_capabilities_advanced_diagnostics_title">Chẩn đoán hiệu năng nâng cao</string>
     <string name="device_capabilities_advanced_diagnostics_description">Mặc định tắt. Ghi lại dòng thời gian trễ ngắn để hỗ trợ khắc phục sự cố trong bản beta.</string>
     <string name="device_capabilities_advanced_diagnostics_expires">Hoạt động đến %1$s</string>
@@ -164,7 +164,7 @@
     <string name="presentation_batch_g_artist_group_by_album_artist">Nhóm theo nghệ sĩ album</string>
     <string name="presentation_batch_g_artist_group_by_album_artist_sub">Nhóm thẻ Nghệ sĩ và album theo nghệ sĩ của album để tránh làm rối danh sách với các nghệ sĩ góp giọng hoặc hợp tuyển</string>
     <string name="presentation_batch_g_artist_info_title">Về phân tích nhiều nghệ sĩ</string>
-    <string name="presentation_batch_g_artist_info_body">PixelPlayerOSS tách thẻ nghệ sĩ bằng ký tự phân tách (/, ;, &amp;) và từ phân tách (feat., ft., vs., x). Các từ phân tách không phân biệt hoa thường.
+    <string name="presentation_batch_g_artist_info_body">YoPlayer tách thẻ nghệ sĩ bằng ký tự phân tách (/, ;, &amp;) và từ phân tách (feat., ft., vs., x). Các từ phân tách không phân biệt hoa thường.
 
 "Trích xuất nghệ sĩ từ tiêu đề" nhận diện các mẫu như (feat. Nghệ sĩ) trong tiêu đề bài hát.
 
@@ -256,7 +256,7 @@ Dấu gạch chéo ngược (\) có thể dùng để thoát ký tự phân tác
     <string name="presentation_batch_g_presets_cd_pin">Ghim</string>
     <string name="presentation_batch_g_presets_cd_rename">Đổi tên</string>
     <string name="presentation_batch_g_presets_cd_delete">Xóa</string>
-    <string name="presentation_batch_g_beta_sheet_welcome_title">Chào mừng bạn đến với PixelPlayerOSS %1$s</string>
+    <string name="presentation_batch_g_beta_sheet_welcome_title">Chào mừng bạn đến với YoPlayer %1$s</string>
     <string name="presentation_batch_g_beta_sheet_welcome_body">Các tính năng mới có thể chưa hoàn thiện hoặc có lỗi. Ý kiến đóng góp của bạn giúp ứng dụng ngày càng tốt hơn.</string>
     <string name="presentation_batch_g_beta_sheet_welcome_body_stable">Bạn đang dùng bản dựng ổn định chính thức. Xem nhật ký thay đổi để khám phá tính năng mới và báo cáo sự cố nếu có.</string>
     <string name="presentation_batch_g_beta_sheet_expect_title">Những điều cần lưu ý</string>
@@ -317,58 +317,7 @@ Dấu gạch chéo ngược (\) có thể dùng để thoát ký tự phân tác
     <string name="presentation_batch_g_beta_sheet_privacy_body">Không gửi thông tin cá nhân hoặc tệp nhạy cảm trong báo cáo công khai trên GitHub.</string>
     <string name="presentation_batch_g_beta_sheet_nightly_title">Bản dựng hàng đêm (Nightly)</string>
     <string name="presentation_batch_g_beta_sheet_nightly_summary">Bản dựng tự động mỗi khi có thay đổi mã nguồn</string>
-    <string name="presentation_batch_g_beta_sheet_nightly_body">Các bản dựng này được tạo trực tiếp từ nhánh phát triển chính.</string>
-    <string name="presentation_batch_g_beta_sheet_nightly_access">Tải bản Nightly trên GitHub Actions</string>
-    <string name="presentation_batch_g_beta_sheet_nightly_report_title">Báo cáo lỗi bản Nightly</string>
-    <string name="presentation_batch_g_beta_sheet_nightly_report_body">Vui lòng kèm theo mã băm commit (commit hash) khi báo lỗi bản Nightly.</string>
-    <string name="presentation_batch_g_album_sel_count">Đã chọn %1$d album</string>
-    <string name="presentation_batch_g_album_sel_selected">đã chọn</string>
-    <string name="presentation_batch_g_album_sel_queue_hint">Phát hoặc đưa các album đã chọn vào hàng đợi.</string>
-    <string name="presentation_batch_g_album_sel_limit">Đã đạt giới hạn chọn tối đa %1$d album</string>
-    <string name="presentation_batch_g_app_tagline">Tự do thưởng thức âm nhạc theo cách của bạn</string>
-    <string name="sidebar_edit_shortcuts">Chỉnh sửa lối tắt thanh bên</string>
-    <string name="sidebar_shortcuts_dialog_title">Tùy biến lối tắt</string>
-    <string name="sidebar_open">Mở thanh bên</string>
-    <string name="presentation_batch_g_brick_high">Điểm cao: %1$d</string>
-    <string name="presentation_batch_g_brick_cd_close">Đóng trò chơi</string>
-    <string name="presentation_batch_g_brick_stat_score">ĐIỂM</string>
-    <string name="presentation_batch_g_brick_stat_lvl">Màn: %1$d</string>
-    <string name="presentation_batch_g_brick_stat_lives">MẠNG</string>
-    <string name="presentation_batch_g_brick_level_complete">Hoàn thành màn chơi!</string>
-    <string name="presentation_batch_g_brick_game_over">Trò chơi kết thúc</string>
-    <string name="presentation_batch_g_brick_score_line">Điểm của bạn: %1$d</string>
-    <string name="presentation_batch_g_brick_try_again">Thử lại</string>
-    <string name="presentation_batch_g_brick_next_level">Màn tiếp theo</string>
-    <string name="presentation_batch_g_brick_restart">Chơi lại từ đầu</string>
-    <string name="presentation_batch_g_brick_tap_relaunch">Chạm để phóng bóng</string>
-    <string name="presentation_batch_g_brick_play_random">Phát nhạc ngẫu nhiên khi chơi</string>
-    <string name="presentation_batch_g_brick_title">Pixel Bricks</string>
-    <string name="presentation_batch_g_brick_high_score">KỶ LỤC  %1$d</string>
-    <string name="presentation_batch_g_brick_play">Chơi ngay</string>
-    <string name="presentation_batch_g_brick_drag_paddle">Kéo thanh đỡ để di chuyển</string>
-    <string name="presentation_batch_g_backup_restore_modules">Các mục khôi phục</string>
-    <string name="presentation_batch_g_backup_restoring">Đang khôi phục dữ liệu…</string>
-    <string name="presentation_batch_g_backup_restore_selected">Khôi phục các mục đã chọn</string>
-    <string name="presentation_batch_g_backup_details">Chi tiết bản sao lưu</string>
-    <string name="presentation_batch_g_backup_created">Ngày tạo</string>
-    <string name="presentation_batch_g_backup_app_version">Phiên bản ứng dụng</string>
-    <string name="presentation_batch_g_backup_schema">Cấu trúc (Schema)</string>
-    <string name="presentation_batch_g_backup_device">Thiết bị</string>
-    <string name="presentation_batch_g_backup_unknown">Chưa có thông tin</string>
-    <string name="presentation_batch_g_backup_modules_selected">Đã chọn %1$d trên %2$d mục</string>
-    <string name="presentation_batch_g_backup_transfer_progress">Tiến độ truyền dữ liệu</string>
-    <string name="presentation_batch_g_backup_cd_select_all">Chọn tất cả</string>
-    <string name="presentation_batch_g_backup_cd_clear_selection">Bỏ chọn tất cả</string>
-    <string name="presentation_batch_g_backup_entries_will_replace">%1$d mục · Sẽ thay thế dữ liệu hiện có</string>
-    <string name="presentation_batch_g_player_cd_cloud_stream">Phát từ đám mây</string>
-    <string name="presentation_batch_g_player_cd_collapse">Thu gọn trình phát</string>
-    <string name="presentation_batch_g_player_cd_queue">Hàng đợi phát nhạc</string>
-    <string name="presentation_batch_g_player_cd_lyrics">Lời bài hát</string>
-    <string name="presentation_batch_g_changelog_sec_initial_release">Bản phát hành đầu tiên</string>
-    <string name="presentation_batch_g_changelog_sec_removed_for_foss">Loại bỏ để đáp ứng tiêu chuẩn FOSS</string>
-    <string name="presentation_batch_g_changelog_sec_release_readiness">Chuẩn bị phát hành</string>
-    <string name="presentation_batch_g_changelog_sec_security_privacy">Bảo mật &amp; Quyền riêng tư</string>
-    <string name="presentation_batch_g_changelog_sec_whats_new">Có gì mới</string>
-    <string name="presentation_batch_g_changelog_sec_improvements">Cải tiến &amp; Tối ưu</string>
-    <string name="presentation_batch_g_changelog_sec_under_the_hood">Nâng cấp hệ thống bên dưới</string>
+    <string name="presentation_batch_g_app_name" translatable="false">YoPlayer</string>
+    <string name="presentation_batch_g_changelog_070_item_1">Phiên bản FOSS công khai đầu tiên của YoPlayer.</string>
+    <string name="presentation_batch_g_changelog_071_item_3">Sửa lỗi giao diện và tối ưu hóa trong YoPlayer.</string>
 </resources>

@@ -229,8 +229,8 @@
     <string name="widget_bar_4x1_desc">شريط مشغل مضغوط</string>
     <string name="widget_control_4x2_desc">عناصر تحكم كاملة مع التشغيل العشوائي والتكرار</string>
     <string name="widget_grid_2x2_desc">مشغل مربع بسيط</string>
-    <string name="app_name_change_message">هذا التطبيق أصبح الآن PixelPlayerOSS. واصل الاستماع!</string>
-    <string name="all_files_access_description">لتعديل البيانات الوصفية للأغاني (ملفات .mp3)، يحتاج PixelPlayerOSS إلى إذن خاص للوصول إلى جميع الملفات. يتيح لنا ذلك تعديل وسوم المسارات مباشرةً. يرجى منح هذا الإذن في الشاشة التالية لتمكين تعديل البيانات الوصفية.</string>
+    <string name="app_name_change_message">هذا التطبيق أصبح الآن YoPlayer. واصل الاستماع!</string>
+    <string name="all_files_access_description">لتعديل البيانات الوصفية للأغاني (ملفات .mp3)، يحتاج YoPlayer إلى إذن خاص للوصول إلى جميع الملفات. يتيح لنا ذلك تعديل وسوم المسارات مباشرةً. يرجى منح هذا الإذن في الشاشة التالية لتمكين تعديل البيانات الوصفية.</string>
     <string name="cloud_download_action">تنزيل</string>
     <string name="cloud_download_queued">في قائمة الانتظار</string>
     <string name="cloud_downloading">جاري التنزيل…</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_match_score">نسبة الثقة في التطابق: %1$d%%</string>
     <string name="musicbrainz_applied">تم حفظ معرّفات MusicBrainz. تم استكمال السنة المفقودة والأسماء المؤقتة.</string>
     <string name="cloud_playlist_download">تنزيل قائمة التشغيل</string>
+    <string name="player_view_title">مظهر المشغل</string>
+    <string name="player_view_subtitle">محاذاة وموقع عنوان الأغنية</string>
+    <string name="player_title_alignment_title">محاذاة العنوان</string>
+    <string name="player_title_position_title">موقع العنوان</string>
+    <string name="player_title_align_left">يسار</string>
+    <string name="player_title_align_center">وسط</string>
+    <string name="player_title_pos_below">أسفل الغلاف</string>
+    <string name="player_title_pos_above">أعلى الغلاف</string>
+    <string name="usb_dac_exclusive_title">الوصول إلى صوت أفضل عبر USB</string>
+    <string name="usb_dac_exclusive_subtitle">إخراج صوتي مباشر دون إعادة ترميز إلى USB DAC</string>
+
 </resources>

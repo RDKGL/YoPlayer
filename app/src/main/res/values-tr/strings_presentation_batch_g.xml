@@ -50,7 +50,7 @@
     <string name="device_capabilities_report_generate">Rapor oluştur</string>
     <string name="device_capabilities_report_regenerate">Yeniden Oluştur</string>
     <string name="device_capabilities_report_share">Paylaş</string>
-    <string name="device_capabilities_report_share_title">PixelPlayer performans raporu</string>
+    <string name="device_capabilities_report_share_title">YoPlayer performans raporu</string>
     <string name="device_capabilities_report_title">Performans raporu</string>
     <string name="device_capabilities_review_title">Oynatmanın gözden geçirilmesi gerekiyor</string>
     <string name="device_capabilities_storage_available">Kullanılabilir</string>
@@ -317,186 +317,53 @@
     <string name="presentation_batch_g_stats_habit_no_playback_yet">Henüz oynatma yok</string>
     <string name="presentation_batch_g_stats_habit_sessions_per_day">Oturum/gün</string>
     <string name="presentation_batch_g_stats_hero_listening">Dinleme</string>
-    <string name="presentation_batch_g_stats_hero_plays">Çalma</string>
+    <string name="presentation_batch_g_stats_hero_plays">Oynatmalar</string>
     <string name="presentation_batch_g_stats_n_plays">%1$d çalma</string>
-    <string name="presentation_batch_g_stats_overview_avg_per_day">Günlük ort.</string>
-    <string name="presentation_batch_g_stats_overview_title">Dinleme istatistikleri</string>
-    <string name="presentation_batch_g_stats_overview_top_track">En iyi parça</string>
+    <string name="presentation_batch_g_stats_overview_avg_per_day">Günlük ortalama</string>
+    <string name="presentation_batch_g_stats_overview_title">Dinleme İstatistikleri</string>
+    <string name="presentation_batch_g_stats_overview_top_track">Bir numaralı parça</string>
     <string name="presentation_batch_g_stats_overview_top_track_line">%1$s • %2$d çalma</string>
-    <string name="presentation_batch_g_stats_overview_total_plays">Toplam çalma</string>
-    <string name="presentation_batch_g_stats_peak_segment">Zirve segment</string>
-    <string name="presentation_batch_g_stats_percent">%1$d%%</string>
-    <string name="presentation_batch_g_stats_range_all_time">Tüm Zamanlar</string>
-    <string name="presentation_batch_g_stats_range_month_to_date">Bu Ay</string>
+    <string name="presentation_batch_g_stats_overview_total_plays">Toplam çalma sayısı</string>
+    <string name="presentation_batch_g_stats_peak_segment">Zirve segmenti</string>
+    <string name="presentation_batch_g_stats_percent">%%%1$d</string>
+    <string name="presentation_batch_g_stats_range_all_time">Tüm zamanlar</string>
+    <string name="presentation_batch_g_stats_range_month_to_date">Bu ay</string>
     <string name="presentation_batch_g_stats_range_today">Bugün</string>
-    <string name="presentation_batch_g_stats_range_week_to_date">Bu Hafta</string>
-    <string name="presentation_batch_g_stats_week_label">%1$d. Hafta</string>
-    <string name="presentation_batch_g_stats_range_year_to_date">Bu Yıl</string>
-    <string name="presentation_batch_g_stats_rhythm_all_time">Tüm zamanlar ilerleme</string>
+    <string name="presentation_batch_g_stats_range_week_to_date">Bu hafta</string>
+    <string name="presentation_batch_g_stats_week_label">%1$d. hafta</string>
+    <string name="presentation_batch_g_stats_range_year_to_date">Bu yıl</string>
+    <string name="presentation_batch_g_stats_rhythm_all_time">Tüm zamanların ilerlemesi</string>
     <string name="presentation_batch_g_stats_rhythm_daily">Günlük ritim</string>
     <string name="presentation_batch_g_stats_rhythm_monthly">Aylık ritim</string>
     <string name="presentation_batch_g_stats_rhythm_weekly">Haftalık ritim</string>
-    <string name="presentation_batch_g_stats_rhythm_year">Yıla genel bakış</string>
+    <string name="presentation_batch_g_stats_rhythm_year">Yıllık genel bakış</string>
     <string name="presentation_batch_g_stats_section_listening_habits">Dinleme alışkanlıkları</string>
     <string name="presentation_batch_g_stats_section_listening_timeline">Dinleme zaman çizelgesi</string>
     <string name="presentation_batch_g_stats_slice_others">Diğerleri</string>
     <string name="presentation_batch_g_stats_slice_top_1">İlk 1</string>
     <string name="presentation_batch_g_stats_slice_top_2_3">İlk 2-3</string>
-    <string name="presentation_batch_g_stats_timeline_metric_avg_session">Ort. oturum</string>
-    <string name="presentation_batch_g_stats_timeline_metric_avg_session_desc">Her segment için ortalama dinleme süresi.</string>
+    <string name="presentation_batch_g_stats_timeline_metric_avg_session">Ortalama oturum</string>
+    <string name="presentation_batch_g_stats_timeline_metric_avg_session_desc">Her bir segment için ortalama dinleme süresi.</string>
     <string name="presentation_batch_g_stats_timeline_metric_listening_time">Dinleme süresi</string>
-    <string name="presentation_batch_g_stats_timeline_metric_listening_time_desc">Seçilen aralıkta toplam dinleme süresi.</string>
+    <string name="presentation_batch_g_stats_timeline_metric_listening_time_desc">Seçilen aralıkta kaydedilen toplam dinleme süresi.</string>
     <string name="presentation_batch_g_stats_timeline_metric_play_count">Çalma sayısı</string>
-    <string name="presentation_batch_g_stats_timeline_metric_play_count_desc">Her segmentte tamamladığınız oturum sayısı.</string>
+    <string name="presentation_batch_g_stats_timeline_metric_play_count_desc">Segment başına kaç oturumu tamamladığınız.</string>
     <string name="presentation_batch_g_stats_timeline_support_all">Yıllık çubuklar tüm geçmişinizi özetler.</string>
-    <string name="presentation_batch_g_stats_timeline_support_day">Günlük ritminizi ortaya çıkarmak için 4 saatlik pencerelere bölündü.</string>
-    <string name="presentation_batch_g_stats_timeline_support_month">Haftalık çubuklar ayın eğilimini gösterir.</string>
-    <string name="presentation_batch_g_stats_timeline_support_week">Günlük çubuklar haftalık alışkanlıkları karşılaştırmayı kolaylaştırır.</string>
+    <string name="presentation_batch_g_stats_timeline_support_day">Günlük ritminizi ortaya çıkarmak için 4 saatlik pencerelere bölünmüştür.</string>
+    <string name="presentation_batch_g_stats_timeline_support_month">Haftalık çubuklar ay içindeki eğilimi gösterir.</string>
+    <string name="presentation_batch_g_stats_timeline_support_week">Günlük çubuklar haftadan haftaya alışkanlıkları karşılaştırmayı kolaylaştırır.</string>
     <string name="presentation_batch_g_stats_timeline_support_year">Aylık çubuklar yıl boyunca mevsimselliği gösterir.</string>
     <string name="presentation_batch_g_stats_title">Dinleme İstatistikleri</string>
     <string name="presentation_batch_g_stats_top_three_share_label">İlk 3 payı</string>
-    <string name="presentation_batch_g_stats_track_concentration_subtitle">Dinleme sürenizin en iyi parçalarınıza nasıl dağıldığı.</string>
+    <string name="presentation_batch_g_stats_track_concentration_subtitle">Dinleme sürenizin en iyi parçalarınız arasında nasıl dağıldığı.</string>
     <string name="presentation_batch_g_streaming_subtitle">Bulut hesaplarınızdan müzik akışı yapın</string>
     <string name="presentation_batch_g_streaming_title">Bulut Akışı</string>
-    <string name="presentation_batch_g_sync_percent">%1$d%%</string>
-    <string name="presentation_batch_g_topbar_build_debug">Hata Ayıklama</string>
+    <string name="presentation_batch_g_topbar_build_debug">Hata ayıklama</string>
     <string name="presentation_batch_g_topbar_build_stable">Kararlı</string>
     <string name="presentation_batch_g_topbar_cd_changelog">Değişiklik Günlüğü</string>
     <string name="presentation_batch_g_yes">Evet</string>
-    <string name="presentation_batch_g_artist_info_body">PixelPlayerOSS, sanatçı etiketlerini karakter sınırlayıcılar (/, ;, &amp;) ve kelime sınırlayıcılar (feat., ft., vs., x) kullanarak böler. Kelime sınırlayıcılar büyük/küçük harf duyarsız olarak eşleştirilir.
 
-"Başlıktan Sanatçıları Çıkar" seçeneği, şarkı başlıklarındaki (feat. Artist) gibi kalıpları algılar.
-
-Karakter sınırlayıcıları etkisiz hale getirmek için ters eğik çizgi (\) kullanılabilir.</string>
-    <string name="presentation_batch_g_beta_sheet_welcome_title">Hoş geldiniz: PixelPlayerOSS %1$s</string>
-    <string name="presentation_batch_g_beta_sheet_before_2">En son PixelPlayerOSS sürümüne güncelleyin ve sorunun hâlâ devam ettiğini doğrulayın.</string>
-    <string name="presentation_batch_g_beta_sheet_env_version">PixelPlayerOSS sürümü:</string>
-    <string-array name="presentation_batch_g_changelog_060_whats_new">
-        <item>Son Çalınanlar ve kalıcı kuyruk geri yükleme, dinleme oturumunuzu hazır tutar.</item>
-        <item>Yedekleme ve Geri Yükleme v3 ile hesap yönetimi araçları artık dahil.</item>
-        <item>Şarkı sözleri; manuel arama yedeği ve depolama iyileştirmeleriyle daha akıllı hale geldi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_060_improvements">
-        <item>Açılış, kitaplık, kuyruk ve oynatıcı etkileşimlerinde büyük bir performans iyileştirmesi.</item>
-        <item>Gezinme ve arama akışları, daha güvenli rota yönetimiyle daha güvenilir.</item>
-        <item>Daha fazla cihaz ve biçim için ses oynatma uyumluluğu iyileştirildi.</item>
-        <item>Çoklu seçim iş akışları şarkıları, albümleri ve çalma listelerini kapsayacak şekilde genişletildi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_060_fixes">
-        <item>Kuyruk ve karıştırma davranışı artık daha kararlı ve öngörülebilir.</item>
-        <item>Uyku zamanlayıcısı, Dosyalar sekmesi gezinmesi ve albüm sanatçısı çökme sorunları giderildi.</item>
-        <item>Aşırı ısınma ve bellek sorunlarını azaltmak için widget yükleme ve servis kararlılığı iyileştirildi.</item>
-        <item>Uygulama genelinde hata düzeltmeleri ve arayüz cilası.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_050_highlights">
-        <item>Material 3 Expressive arayüz güncellemesi</item>
-        <item>10 bantlı ekolayzer ve efektler</item>
-        <item>Yeni kitaplık senkronizasyon akışı</item>
-        <item>M3U çalma listesi içe/dışa aktarma</item>
-        <item>Deezer sanatçı görseli entegrasyonu</item>
-        <item>Özel çalma listesi kapakları</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_050_improvements">
-        <item>Ayarlar mimarisinin yeniden düzenlenmesi</item>
-        <item>Kuyruk ve oynatıcı animasyonları</item>
-        <item>Baseline Profiles ve performans</item>
-        <item>Eşitleme ofsetli daha iyi şarkı sözü sistemi</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_050_fixes">
-        <item>Oynatıcı sayfası kararlılığı</item>
-        <item>Genel hata düzeltmeleri ve temizlik</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_040_highlights">
-        <item>Kapsamlı gezinme yeniden tasarımı</item>
-        <item>Kaynak dizinlerini seçmek için yeni dosya gezgini</item>
-        <item>Uzak cihazlar arasında kesintisiz süreklilik</item>
-        <item>Şarkılar arasında aralıksız geçiş</item>
-        <item>Çapraz geçiş (Crossfade) kontrolü</item>
-        <item>Yeni Özel Geçişler özelliği (yalnızca çalma listeleri için)</item>
-        <item>Uygulama kapatıldıktan sonra da çalmaya devam etme</item>
-        <item>Arayüz optimizasyonları</item>
-        <item>Geliştirilmiş istatistik özelliği</item>
-        <item>Daha fazla özellik sunan, yeniden tasarlanmış kuyruk kontrolü</item>
-        <item>Çalma ve meta veri düzenleme için farklı dosya türlerinde iyileştirilmiş destek</item>
-        <item>Geliştirilmiş izin denetleyicisi</item>
-        <item>Küçük hata düzeltmeleri</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_030_whats_new">
-        <item>Dinleme oturumlarınıza daha derin içgörüler sunan, daha zengin bir dinleme istatistikleri merkezi sunuldu.</item>
-        <item>Yerel dosyaları anında açıp önizlemek için yüzen bir hızlı oynatıcı kullanıma sunuldu.</item>
-        <item>Ağaç tarzı gezgin ve çalma listesine hazır görünüm içeren bir klasörler sekmesi eklendi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_030_improvements">
-        <item>Daha temiz ve tutarlı bir deneyim için Material 3 arayüzü genel olarak iyileştirildi.</item>
-        <item>Meta veri düzenleme artık kapak resmi değiştirmeyi destekliyor.</item>
-        <item>Daha akıcı gezinme için uygulama genelinde animasyonlar ve geçişler yumuşatıldı.</item>
-        <item>Sanatçı ekranı düzeni, daha zengin ayrıntılar ve cilayla geliştirildi.</item>
-        <item>DailyMix ve YourMix oluşturma, daha akıllı ve çeşitli seçimlerle yükseltildi.</item>
-        <item>Daha hızlı keşif için arama alaka düzeyi ve sunumu iyileştirildi.</item>
-        <item>Daha geniş bir ses dosyası biçimi yelpazesi için destek genişletildi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_030_fixes">
-        <item>Şarkı ayrıntılarının her yerde doğru kalması için meta veri sorunları çözüldü.</item>
-        <item>Bildirim kısayolları, oynatmaya güvenilir biçimde geri dönecek şekilde onarıldı.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_020_added">
-        <item>En yeni özelliklerden haberdar olmanız için uygulama içi değişiklik günlüğü.</item>
-        <item>Gömülü ve harici .LRC dosyaları desteği.</item>
-        <item>Çevrimdışı şarkı sözü desteği.</item>
-        <item>Senkronize şarkı sözleri (şarkıyla eşzamanlı).</item>
-        <item>Tüm kuyruğu görüntülemek için yeni ekran.</item>
-        <item>Kuyruktaki şarkıları yeniden sıralama ve kaldırma.</item>
-        <item>Mini oynatıcı hareketleri (kapatmak için aşağı kaydırın).</item>
-        <item>Daha fazla Material animasyonu eklendi.</item>
-        <item>Görünümü ve hissi özelleştirmek için yeni ayarlar.</item>
-        <item>Önbelleği temizlemek için yeni ayarlar.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_020_changed">
-        <item>Kullanıcı arayüzü baştan tasarlandı.</item>
-        <item>Oynatıcı baştan tasarlandı.</item>
-        <item>Kitaplıkta performans iyileştirmeleri.</item>
-        <item>Uygulama açılış hızı iyileştirildi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_020_fixed">
-        <item>Etiket düzenleyicideki çeşitli hatalar giderildi.</item>
-        <item>Oynatma bildiriminin temizlenmemesine yol açan bir hata giderildi.</item>
-        <item>Uygulamanın çökmesine neden olan birkaç hata giderildi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_070_whats_new">
-        <item>PixelPlayerOSS\'in ilk herkese açık FOSS sürümü.</item>
-        <item>Yerel oynatma, çalma listeleri, favoriler, şarkı sözleri, dinleme istatistikleri, dinamik Material 3 temalandırma, widget\'lar ve yedekleme/geri yükleme içerir.</item>
-        <item>Kendi barındırdığınız Navidrome/Subsonic ve Jellyfin desteğini korur; ayrıca isteğe bağlı LRCLIB şarkı sözleri ve Deezer sanatçı görseli aramasını sunar.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_070_improvements">
-        <item>Telegram, NetEase, QQ Music, Google Drive, Gemini, Cast, Wear OS, Play Store faturalandırması, Firebase, Crashlytics ve Google Play Services çalışma zamanı bağımlılıkları kaldırıldı.</item>
-        <item>Herkese açık Last.fm ve ListenBrainz dinleme bildirimi (scrobbling) kaldırıldı; kendi barındırdığınız Navidrome/Subsonic raporlaması kullanıcının kendi sunucusuyla sınırlı kalır.</item>
-        <item>Bu ilk FOSS sürümü için paketlenmiş çeviriler ve uygulama içi dil seçici kaldırıldı; önce İngilizce kaynaklar sunuluyor.</item>
-        <item>Yerel/özel imzalama dosyalarına, sahte imzalama değerlerine veya yalnızca uygulama mağazalarına özgü varsayımlara dayanan yayın yolları kaldırıldı.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_070_fixes">
-        <item>F-Droid meta verileri, Fastlane mağaza meta verileri, gizlilik notları, güvenlik notları, bağımlılık/lisans belgeleri ve katkıda bulunanlar için rehber eklendi.</item>
-        <item>Yerel imzalama anahtarları yoksa sürüm derlemeleri imzasız kalır.</item>
-        <item>Tekrarlanabilir imzasız doğrulama derlemeleri için pixelplayer.disableReleaseSigning=true eklendi.</item>
-        <item>Yerel/ikili Maven yapıtları ve JitPack bağımlılıkları dahil olmak üzere varlık ve bağımlılık lisans izleri belgelendi.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_070_added">
-        <item>Loopback bulut akışı artık oturum başına bir jeton gerektiriyor.</item>
-        <item>Yedek geri yükleme, özel modül işleyicilerine ait tercih anahtarlarını yok sayar.</item>
-        <item>HTTP istek başlıkları ve ham Android günlükleri Timber sürüm filtresini atlamasın diye sürüm günlüğü sıkılaştırıldı.</item>
-        <item>Ayrıca akıllı çalma listesi kalıcılığı, yinelenen parça taraması, oynatma hızı kontrolü, daha net oynatma/senkronizasyon hata mesajları ve geliştirilmiş erişilebilirlik de içerir.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_v020_whats_new">
-        <item>Material 3 Expressive tasarım turu: uygulama genelinde yeni bir hareket şeması, dalgalı ilerleme göstergeleri ve şekil dönüştüren animasyonlar.</item>
-        <item>VPN ve yerel ağ ana makineleri için düz HTTP üzerinden Jellyfin sunucularına artık izin veriliyor.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_v020_improvements">
-        <item>Daha küçük uygulama: daha yalın kod küçültme kuralları kurulum boyutundan yaklaşık 1,5 MB azaltıyor.</item>
-        <item>Daha hızlı, akıcı açılış: Baseline Profiles, yeni arayüz ve kod yollarına uyması için baştan oluşturuldu.</item>
-        <item>Kapsamlı bir Compose performans çalışması sayesinde listeler, sayfalar ve ekolayzer daha seri.</item>
-    </string-array>
-    <string-array name="presentation_batch_g_changelog_v020_under_the_hood">
-        <item>Daha güvenilir bulut oynatma: şarkılar hızlıca atlanırken iptal edilen Navidrome/Jellyfin istekleri artık yanlışlıkla ağ hatası olarak bildirilmiyor.</item>
-        <item>Yedekleme, geri yükleme ve kurulum olayları artık ekran döndürme sırasında kaybolamıyor.</item>
-        <item>Bahar temizliği: ölü kod kaldırıldı, kullanımdan kaldırılmış API\'ler taşındı ve bağımlılıklar güncellendi.</item>
-    </string-array>
+    <string name="presentation_batch_g_app_name" translatable="false">YoPlayer</string>
+    <string name="presentation_batch_g_changelog_070_item_1">YoPlayer\'in ilk kamuya açık FOSS sürümü.</string>
+    <string name="presentation_batch_g_changelog_071_item_3">YoPlayer\'de tema düzeltmeleri ve optimizasyonlar.</string>
 </resources>

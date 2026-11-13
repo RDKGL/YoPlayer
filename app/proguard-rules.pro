@@ -24,20 +24,20 @@
 -dontwarn com.jsyn.**
 -dontwarn com.softsynth.**
 
--keepclassmembers class com.lostf1sh.pixelplayeross.data.model.** { *; }
+-keepclassmembers class open.yo.player.data.model.** { *; }
 
 -keep class com.google.gson.reflect.TypeToken { *; }
 -keep class * extends com.google.gson.reflect.TypeToken
 
--keep class com.lostf1sh.pixelplayeross.data.preferences.PreferenceBackupEntry { *; }
--keep class com.lostf1sh.pixelplayeross.data.backup.model.** { *; }
--keep class com.lostf1sh.pixelplayeross.data.backup.module.** { *; }
--keep class com.lostf1sh.pixelplayeross.data.database.FavoritesEntity { *; }
--keep class com.lostf1sh.pixelplayeross.data.database.SongEngagementEntity { *; }
--keep class com.lostf1sh.pixelplayeross.data.database.LyricsEntity { *; }
--keep class com.lostf1sh.pixelplayeross.data.database.SearchHistoryEntity { *; }
--keep class com.lostf1sh.pixelplayeross.data.database.TransitionRuleEntity { *; }
--keep class com.lostf1sh.pixelplayeross.data.database.AudioBookmarkEntity { *; }
+-keep class open.yo.player.data.preferences.PreferenceBackupEntry { *; }
+-keep class open.yo.player.data.backup.model.** { *; }
+-keep class open.yo.player.data.backup.module.** { *; }
+-keep class open.yo.player.data.database.FavoritesEntity { *; }
+-keep class open.yo.player.data.database.SongEngagementEntity { *; }
+-keep class open.yo.player.data.database.LyricsEntity { *; }
+-keep class open.yo.player.data.database.SearchHistoryEntity { *; }
+-keep class open.yo.player.data.database.TransitionRuleEntity { *; }
+-keep class open.yo.player.data.database.AudioBookmarkEntity { *; }
 
 -keep class io.ktor.server.engine.** { *; }
 -keep class io.ktor.server.cio.** { *; }

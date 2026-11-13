@@ -229,8 +229,8 @@
     <string name="widget_bar_4x1_desc">Barra de reproductor compacta</string>
     <string name="widget_control_4x2_desc">Controles completos con aleatorio y repetición</string>
     <string name="widget_grid_2x2_desc">Reproductor cuadrado minimalista</string>
-    <string name="app_name_change_message">Esta app ahora es PixelPlayerOSS. ¡Sigue escuchando!</string>
-    <string name="all_files_access_description">Para editar los metadatos de las canciones (archivos .mp3), PixelPlayerOSS necesita un acceso especial a todos los archivos. Esto nos permite modificar las etiquetas de las pistas directamente. Concede este permiso en la siguiente pantalla para habilitar la edición de metadatos.</string>
+    <string name="app_name_change_message">Esta app ahora es YoPlayer. ¡Sigue escuchando!</string>
+    <string name="all_files_access_description">Para editar los metadatos de las canciones (archivos .mp3), YoPlayer necesita un acceso especial a todos los archivos. Esto nos permite modificar las etiquetas de las pistas directamente. Concede este permiso en la siguiente pantalla para habilitar la edición de metadatos.</string>
     <string name="cloud_download_action">Descargar</string>
     <string name="cloud_download_queued">En cola</string>
     <string name="cloud_downloading">Descargando…</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_match_score">Confianza de la coincidencia: %1$d%%</string>
     <string name="musicbrainz_applied">Identificadores de MusicBrainz guardados. Se completaron el año que faltaba y los nombres provisionales.</string>
     <string name="cloud_playlist_download">Descargar lista de reproducción</string>
+    <string name="player_view_title">Vista del reproductor</string>
+    <string name="player_view_subtitle">Alineación y posición del título</string>
+    <string name="player_title_alignment_title">Alineación del título</string>
+    <string name="player_title_position_title">Posición del título</string>
+    <string name="player_title_align_left">Izquierda</string>
+    <string name="player_title_align_center">Centro</string>
+    <string name="player_title_pos_below">Debajo de la portada</string>
+    <string name="player_title_pos_above">Encima de la portada</string>
+    <string name="usb_dac_exclusive_title">Acceso a mejor sonido por USB</string>
+    <string name="usb_dac_exclusive_subtitle">Salida directa de audio sin muestreo a DAC USB</string>
+
 </resources>

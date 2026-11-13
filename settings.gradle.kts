@@ -28,6 +28,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PixelPlayerOSS"
+rootProject.name = "YoPlayer"
 include(":app")
 include(":baselineprofile")

@@ -229,8 +229,8 @@
     <string name="widget_bar_4x1_desc">Barre de lecture compacte</string>
     <string name="widget_control_4x2_desc">Contrôles complets avec mode aléatoire et répétition</string>
     <string name="widget_grid_2x2_desc">Lecteur carré minimaliste</string>
-    <string name="app_name_change_message">Cette application s\'appelle désormais PixelPlayerOSS. Bonne écoute !</string>
-    <string name="all_files_access_description">Pour modifier les métadonnées des chansons (fichiers .mp3), PixelPlayerOSS a besoin d\'un accès spécial à tous les fichiers. Cela nous permet de modifier directement les balises des pistes. Veuillez accorder cette autorisation sur l\'écran suivant pour activer la modification des métadonnées.</string>
+    <string name="app_name_change_message">Cette application s\'appelle désormais YoPlayer. Bonne écoute !</string>
+    <string name="all_files_access_description">Pour modifier les métadonnées des chansons (fichiers .mp3), YoPlayer a besoin d\'un accès spécial à tous les fichiers. Cela nous permet de modifier directement les balises des pistes. Veuillez accorder cette autorisation sur l\'écran suivant pour activer la modification des métadonnées.</string>
     <string name="cloud_download_action">Télécharger</string>
     <string name="cloud_download_queued">En attente</string>
     <string name="cloud_downloading">Téléchargement…</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_match_score">Fiabilité de la correspondance : %1$d %%</string>
     <string name="musicbrainz_applied">Identifiants MusicBrainz enregistrés. L\'année manquante et les noms génériques ont été complétés.</string>
     <string name="cloud_playlist_download">Télécharger la playlist</string>
+    <string name="player_view_title">Vue du lecteur</string>
+    <string name="player_view_subtitle">Alignement et position du titre</string>
+    <string name="player_title_alignment_title">Alignement du titre</string>
+    <string name="player_title_position_title">Position du titre</string>
+    <string name="player_title_align_left">Gauche</string>
+    <string name="player_title_align_center">Centré</string>
+    <string name="player_title_pos_below">Sous la pochette</string>
+    <string name="player_title_pos_above">Au-dessus de la pochette</string>
+    <string name="usb_dac_exclusive_title">Accès à un meilleur son via USB</string>
+    <string name="usb_dac_exclusive_subtitle">Sortie audio directe sans rééchantillonnage vers le DAC USB</string>
+
 </resources>

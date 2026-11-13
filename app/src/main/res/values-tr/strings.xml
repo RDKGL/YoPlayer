@@ -253,8 +253,8 @@
     <string name="cloud_downloads_empty_subtitle">İndirdiğiniz bulut parçaları burada görünür.</string>
     <string name="cloud_download_selected">Seçili bulut parçalarını indir</string>
     <string name="cloud_download_selected_count">%1$d bulut parçasını indir</string>
-    <string name="app_name_change_message">Bu uygulamanın yeni adı PixelPlayerOSS. Keyifli dinlemeler!</string>
-    <string name="all_files_access_description">Şarkı meta verilerini (.mp3 dosyaları) düzenlemek için PixelPlayerOSS\'in tüm dosyalara özel erişime ihtiyacı vardır. Bu, parça etiketlerini doğrudan değiştirmemizi sağlar. Meta veri düzenlemeyi etkinleştirmek için lütfen sonraki ekranda bu izni verin.</string>
+    <string name="app_name_change_message">Bu uygulamanın yeni adı YoPlayer. Keyifli dinlemeler!</string>
+    <string name="all_files_access_description">Şarkı meta verilerini (.mp3 dosyaları) düzenlemek için YoPlayer\'in tüm dosyalara özel erişime ihtiyacı vardır. Bu, parça etiketlerini doğrudan değiştirmemizi sağlar. Meta veri düzenlemeyi etkinleştirmek için lütfen sonraki ekranda bu izni verin.</string>
     <string name="musicbrainz_lookup">MusicBrainz\'te bul</string>
     <string name="musicbrainz_searching">Kayıt eşleşmeleri aranıyor…</string>
     <string name="musicbrainz_lookup_failed">MusicBrainz sorgusu başarısız oldu</string>
@@ -264,4 +264,15 @@
     <string name="musicbrainz_no_results">Uygun kayıt bulunamadı.</string>
     <string name="musicbrainz_match_score">Eşleşme güveni: %%%1$d</string>
     <string name="musicbrainz_applied">MusicBrainz tanımlayıcıları kaydedildi. Eksik yıl ve yer tutucu adlar tamamlandı.</string>
+    <string name="player_view_title">Oynatıcı görünümü</string>
+    <string name="player_view_subtitle">Şarkı adı hizalama ve konumu</string>
+    <string name="player_title_alignment_title">Başlık hizalaması</string>
+    <string name="player_title_position_title">Başlık konumu</string>
+    <string name="player_title_align_left">Sol</string>
+    <string name="player_title_align_center">Orta</string>
+    <string name="player_title_pos_below">Kapağın altında</string>
+    <string name="player_title_pos_above">Kapağın üstünde</string>
+    <string name="usb_dac_exclusive_title">USB üzerinden daha iyi ses erişimi</string>
+    <string name="usb_dac_exclusive_subtitle">USB DAC cihazına yeniden örnekleme olmaksızın doğrudan ses çıkışı</string>
+
 </resources>

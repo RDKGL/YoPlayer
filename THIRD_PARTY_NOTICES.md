@@ -1,6 +1,6 @@
-# Third-Party Notices
+# Third-Party Notices - YoPlayer
 
-PixelPlayerOSS is licensed under the GNU General Public License v3.0 (GPL-3.0). The app also includes third-party libraries and font assets. This file records source and license evidence useful for app-store and F-Droid review.
+YoPlayer is licensed under the GNU General Public License v3.0 (GPL-3.0). The app also includes third-party libraries and font assets. This file records source and license evidence.
 
 ## Bundled Font Assets
 

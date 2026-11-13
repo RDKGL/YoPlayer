@@ -39,7 +39,7 @@ val enableComposeCompilerReports = providers.gradleProperty("pixelplayer.enableC
 
 @Suppress("DEPRECATION")
 android {
-    namespace = "com.lostf1sh.pixelplayeross"
+    namespace = "open.yo.player"
     compileSdk = 37
 
     sourceSets {
@@ -78,11 +78,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.lostf1sh.pixelplayeross"
+        applicationId = "open.yo.player"
         minSdk = 30
         targetSdk = 37
         versionCode = (project.findProperty("APP_VERSION_CODE") as? String)?.toInt() ?: 1
-        versionName = (project.findProperty("APP_VERSION_NAME") as? String) ?: "1.0.0"
+        versionName = (project.findProperty("APP_VERSION_NAME") as? String) ?: "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -101,11 +101,19 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
 
         release {
             if (hasReleaseSigningConfig) {
                 signingConfig = signingConfigs.getByName("release")
+            } else {
+                signingConfig = signingConfigs.getByName("debug")
             }
             isMinifyEnabled = true
             isShrinkResources = true
