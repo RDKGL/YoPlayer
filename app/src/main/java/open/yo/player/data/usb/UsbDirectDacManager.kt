@@ -13,7 +13,6 @@ import android.hardware.usb.UsbEndpoint
 import android.hardware.usb.UsbInterface
 import android.hardware.usb.UsbManager
 import android.os.Build
-import androidx.annotation.RequiresApi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +56,7 @@ class UsbDirectDacManager @Inject constructor(
     private var activeEndpoint: UsbEndpoint? = null
 
     private var isReceiverRegistered = false
+    private var isNativeLibLoaded = false
     private var onPausePlayerCallback: (() -> Unit)? = null
 
     companion object {
@@ -103,6 +103,14 @@ class UsbDirectDacManager @Inject constructor(
     }
 
     init {
+        try {
+            System.loadLibrary("usb_dac_native")
+            isNativeLibLoaded = true
+        } catch (e: Throwable) {
+            Timber.w(e, "Could not load usb_dac_native library")
+            isNativeLibLoaded = false
+        }
+
         scope.launch {
             preferences.exclusiveUsbAudioEnabledFlow.collect { enabled ->
                 if (enabled) {
@@ -193,10 +201,10 @@ class UsbDirectDacManager @Inject constructor(
 
             for (i in 0 until device.interfaceCount) {
                 val iface = device.getInterface(i)
-                if (iface.interfaceClass == USB_CLASS_AUDIO && iface.interfaceSubclass == 2) {
+                if (iface.interfaceClass == USB_CLASS_AUDIO) {
                     for (e in 0 until iface.endpointCount) {
                         val ep = iface.getEndpoint(e)
-                        if (ep.direction == UsbConstants.USB_DIR_OUT && ep.type == UsbConstants.USB_ENDPOINT_XFER_ISOC) {
+                        if (ep.direction == UsbConstants.USB_DIR_OUT) {
                             outInterface = iface
                             outEndpoint = ep
                             break
@@ -206,23 +214,6 @@ class UsbDirectDacManager @Inject constructor(
                 if (outEndpoint != null) break
             }
 
-            if (outInterface == null || outEndpoint == null) {
-                for (i in 0 until device.interfaceCount) {
-                    val iface = device.getInterface(i)
-                    if (iface.interfaceClass == USB_CLASS_AUDIO) {
-                        for (e in 0 until iface.endpointCount) {
-                            val ep = iface.getEndpoint(e)
-                            if (ep.direction == UsbConstants.USB_DIR_OUT) {
-                                outInterface = iface
-                                outEndpoint = ep
-                                break
-                            }
-                        }
-                    }
-                    if (outEndpoint != null) break
-                }
-            }
-
             if (outInterface != null && connection.claimInterface(outInterface, true)) {
                 activeDevice = device
                 activeConnection = connection
@@ -230,7 +221,14 @@ class UsbDirectDacManager @Inject constructor(
                 activeEndpoint = outEndpoint
 
                 val nativeFd = connection.fileDescriptor
-                initNativeDac(nativeFd, outEndpoint.endpointNumber, outEndpoint.maxPacketSize)
+                val ep = outEndpoint
+                if (isNativeLibLoaded && ep != null) {
+                    try {
+                        initNativeDac(nativeFd, ep.endpointNumber, ep.maxPacketSize)
+                    } catch (t: Throwable) {
+                        Timber.w(t, "Native DAC init skipped")
+                    }
+                }
 
                 _dacState.value = UsbDacState.Connected(
                     deviceName = device.productName ?: "USB Audio DAC",
@@ -243,7 +241,7 @@ class UsbDirectDacManager @Inject constructor(
                 connection.close()
                 _dacState.value = UsbDacState.Error("Failed to claim USB audio interface")
             }
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Timber.e(e, "Error initializing USB DAC")
             _dacState.value = UsbDacState.Error(e.message ?: "DAC init error")
         }
@@ -269,7 +267,13 @@ class UsbDirectDacManager @Inject constructor(
                     data.size,
                     500
                 )
-                setNativeFormat(sampleRate, bitDepth, channels)
+                if (isNativeLibLoaded) {
+                    try {
+                        setNativeFormat(sampleRate, bitDepth, channels)
+                    } catch (t: Throwable) {
+                        Timber.w(t, "Native setFormat skipped")
+                    }
+                }
 
                 activeDevice?.let { dev ->
                     _dacState.value = UsbDacState.Connected(
@@ -279,7 +283,7 @@ class UsbDirectDacManager @Inject constructor(
                         channels = channels
                     )
                 }
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 Timber.e(e, "Failed to set DAC sample rate: $sampleRate")
             }
         }
@@ -289,10 +293,16 @@ class UsbDirectDacManager @Inject constructor(
         onPausePlayerCallback?.invoke()
         
         try {
-            stopNativeDac()
+            if (isNativeLibLoaded) {
+                try {
+                    stopNativeDac()
+                } catch (t: Throwable) {
+                    Timber.w(t, "Native stopDac error")
+                }
+            }
             activeAudioInterface?.let { activeConnection?.releaseInterface(it) }
             activeConnection?.close()
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Timber.e(e, "Error releasing USB resources")
         } finally {
             activeDevice = null
@@ -300,6 +310,24 @@ class UsbDirectDacManager @Inject constructor(
             activeAudioInterface = null
             activeEndpoint = null
             _dacState.value = UsbDacState.Idle
+        }
+    }
+
+    fun safeWritePcmData(pcmData: ByteArray, offset: Int, length: Int): Int {
+        if (!isNativeLibLoaded) return 0
+        return try {
+            writePcmData(pcmData, offset, length)
+        } catch (t: Throwable) {
+            0
+        }
+    }
+
+    fun safeClearNativeRingBuffer() {
+        if (!isNativeLibLoaded) return
+        try {
+            clearNativeRingBuffer()
+        } catch (t: Throwable) {
+            // Ignored safely
         }
     }
 
@@ -316,14 +344,6 @@ class UsbDirectDacManager @Inject constructor(
     private external fun initNativeDac(fd: Int, epOut: Int, maxPacketSize: Int): Boolean
     private external fun setNativeFormat(sampleRate: Int, bitDepth: Int, channels: Int): Boolean
     private external fun stopNativeDac(): Boolean
-    external fun writePcmData(pcmData: ByteArray, offset: Int, length: Int): Int
-    external fun clearNativeRingBuffer()
-
-    init {
-        try {
-            System.loadLibrary("usb_dac_native")
-        } catch (e: Throwable) {
-            Timber.w(e, "Could not load usb_dac_native library")
-        }
-    }
+    private external fun writePcmData(pcmData: ByteArray, offset: Int, length: Int): Int
+    private external fun clearNativeRingBuffer()
 }

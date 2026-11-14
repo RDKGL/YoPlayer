@@ -39,9 +39,13 @@ class DirectUsbAudioSink(
             else -> 16
         }
 
-        isExclusiveUsbActive = runBlocking {
-            preferences.exclusiveUsbAudioEnabledFlow.first()
-        } && usbDacManager.dacState.value is UsbDacState.Connected
+        isExclusiveUsbActive = try {
+            runBlocking {
+                preferences.exclusiveUsbAudioEnabledFlow.first()
+            } && usbDacManager.dacState.value is UsbDacState.Connected
+        } catch (t: Throwable) {
+            false
+        }
 
         if (isExclusiveUsbActive) {
             usbDacManager.configureSampleRateAndFormat(
@@ -69,7 +73,7 @@ class DirectUsbAudioSink(
                 buffer.get(tempArray)
                 buffer.position(position + remaining)
 
-                usbDacManager.writePcmData(tempArray, 0, remaining)
+                usbDacManager.safeWritePcmData(tempArray, 0, remaining)
             }
             return true
         }
@@ -78,17 +82,17 @@ class DirectUsbAudioSink(
     }
 
     override fun flush() {
-        usbDacManager.clearNativeRingBuffer()
+        usbDacManager.safeClearNativeRingBuffer()
         super.flush()
     }
 
     override fun pause() {
-        usbDacManager.clearNativeRingBuffer()
+        usbDacManager.safeClearNativeRingBuffer()
         super.pause()
     }
 
     override fun reset() {
-        usbDacManager.clearNativeRingBuffer()
+        usbDacManager.safeClearNativeRingBuffer()
         super.reset()
     }
 }

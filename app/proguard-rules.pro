@@ -6,6 +6,12 @@
 
 -keep class com.kyant.taglib.** { *; }
 
+# JNI Native C++ Keep Rules
+-keepclasseswithmembernames,includedescriptorclasses class * {
+    native <methods>;
+}
+-keep class open.yo.player.data.usb.** { *; }
+
 -keep class org.jaudiotagger.tag.** { *; }
 -dontwarn org.jaudiotagger.**
 

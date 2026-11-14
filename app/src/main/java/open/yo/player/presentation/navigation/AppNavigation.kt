@@ -38,7 +38,6 @@ import open.yo.player.presentation.screens.AudioBookmarkFolderScreen
 import open.yo.player.presentation.screens.AudioBookmarksScreen
 import open.yo.player.presentation.screens.CloudDownloadsScreen
 import open.yo.player.presentation.screens.UpdatesScreen
-import open.yo.player.presentation.screens.TelegramSettingsScreen
 import open.yo.player.presentation.model.SettingsCategory
 import open.yo.player.presentation.screens.AccountsScreen
 import open.yo.player.presentation.screens.ArtistDetailScreen

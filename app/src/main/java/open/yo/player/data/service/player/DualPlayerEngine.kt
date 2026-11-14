@@ -236,7 +236,7 @@ class DualPlayerEngine @Inject constructor(
     private val jellyfinStreamProxy: open.yo.player.data.jellyfin.JellyfinStreamProxy,
     private val cloudOfflineRepository: CloudOfflineRepository,
     private val usbDirectDacManager: open.yo.player.data.usb.UsbDirectDacManager,
-    private val preferences: UserPreferencesRepository
+    private val preferences: open.yo.player.data.preferences.UserPreferencesRepository
 ) {
     private companion object {
         // A local file reaches READY in ~100ms with a working output path, so 1.5s of

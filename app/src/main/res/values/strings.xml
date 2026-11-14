@@ -296,7 +296,4 @@
     <string name="player_title_align_center">Center</string>
     <string name="player_title_pos_below">Below artwork</string>
     <string name="player_title_pos_above">Above artwork</string>
-    <string name="usb_dac_exclusive_title">Access to better sound via USB</string>
-    <string name="usb_dac_exclusive_subtitle">Direct audio output without resampling to USB DAC</string>
-
 </resources>

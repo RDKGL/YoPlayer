@@ -272,7 +272,4 @@
     <string name="player_title_align_center">По центру</string>
     <string name="player_title_pos_below">Под обложкой</string>
     <string name="player_title_pos_above">Над обложкой</string>
-    <string name="usb_dac_exclusive_title">Доступ к лучшему звучанию через USB</string>
-    <string name="usb_dac_exclusive_subtitle">Прямой вывод аудио без передискретизации на USB ЦАП</string>
-
 </resources>
