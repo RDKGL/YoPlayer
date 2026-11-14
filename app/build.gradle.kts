@@ -81,10 +81,24 @@ android {
         applicationId = "open.yo.player"
         minSdk = 30
         targetSdk = 37
-        versionCode = (project.findProperty("APP_VERSION_CODE") as? String)?.toInt() ?: 1
-        versionName = (project.findProperty("APP_VERSION_NAME") as? String) ?: "0.1.0"
+        versionCode = (project.findProperty("APP_VERSION_CODE") as? String)?.toInt() ?: 2
+        versionName = (project.findProperty("APP_VERSION_NAME") as? String) ?: "0.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags += "-std=c++17"
+                abiFilters += setOf("arm64-v8a", "armeabi-v7a")
+            }
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
     }
 
     signingConfigs {

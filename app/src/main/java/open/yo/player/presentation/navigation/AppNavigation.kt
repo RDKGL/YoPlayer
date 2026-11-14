@@ -38,6 +38,7 @@ import open.yo.player.presentation.screens.AudioBookmarkFolderScreen
 import open.yo.player.presentation.screens.AudioBookmarksScreen
 import open.yo.player.presentation.screens.CloudDownloadsScreen
 import open.yo.player.presentation.screens.UpdatesScreen
+import open.yo.player.presentation.screens.TelegramSettingsScreen
 import open.yo.player.presentation.model.SettingsCategory
 import open.yo.player.presentation.screens.AccountsScreen
 import open.yo.player.presentation.screens.ArtistDetailScreen
@@ -755,6 +756,17 @@ fun AppNavigation(
                     songId = backStackEntry.arguments?.getString("songId").orEmpty(),
                     navController = navController,
                     playerViewModel = playerViewModel
+                )
+            }
+            composable(
+                Screen.TelegramSettings.route,
+                enterTransition = { enterTransition() },
+                exitTransition = { exitTransition() },
+                popEnterTransition = { popEnterTransition() },
+                popExitTransition = { popExitTransition() },
+            ) {
+                TelegramSettingsScreen(
+                    onBack = { navController.popBackStack() }
                 )
             }
         }

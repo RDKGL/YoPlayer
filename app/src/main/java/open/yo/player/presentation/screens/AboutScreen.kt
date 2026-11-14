@@ -142,7 +142,7 @@ fun AboutScreen(
     onNavigationIconClick: () -> Unit,
 ) {
     val context = LocalContext.current
-    val versionName = "0.1.0"
+    val versionName = "0.1.1"
 
     val projectLinks = listOf(
         ProjectLink(

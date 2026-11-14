@@ -26,7 +26,7 @@
 
 **YoPlayer** is an open-source, local-first Android music player built with Jetpack Compose and Material 3 Expressive UI guidelines.
 
-Package Name: `open.yo.player` | Current Version: `v0.1.0`
+Package Name: `open.yo.player` | Current Version: `v0.1.1`
 
 ---
 

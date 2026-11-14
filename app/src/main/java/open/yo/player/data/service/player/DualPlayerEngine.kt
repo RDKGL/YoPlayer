@@ -234,7 +234,9 @@ class DualPlayerEngine @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val navidromeStreamProxy: NavidromeStreamProxy,
     private val jellyfinStreamProxy: open.yo.player.data.jellyfin.JellyfinStreamProxy,
-    private val cloudOfflineRepository: CloudOfflineRepository
+    private val cloudOfflineRepository: CloudOfflineRepository,
+    private val usbDirectDacManager: open.yo.player.data.usb.UsbDirectDacManager,
+    private val preferences: UserPreferencesRepository
 ) {
     private companion object {
         // A local file reaches READY in ~100ms with a working output path, so 1.5s of
@@ -248,6 +250,12 @@ class DualPlayerEngine @Inject constructor(
         private val LOCAL_MEDIA_SCHEMES = setOf("content", "file", "android.resource")
         private val REMOTE_MEDIA_SCHEMES = setOf("http", "https", "navidrome", "jellyfin")
         private val CLOUD_PROXY_SCHEMES = setOf("navidrome", "jellyfin")
+    }
+
+    init {
+        usbDirectDacManager.setOnPausePlayerCallback {
+            if (::playerA.isInitialized) playerA.pause()
+        }
     }
 
     data class TransitionTarget(
@@ -1056,28 +1064,27 @@ class DualPlayerEngine @Inject constructor(
                 enableFloatOutput: Boolean,
                 enableAudioOutputPlaybackParams: Boolean
             ): AudioSink {
-                if (outputMode.usesUnmodifiedMedia3AudioSink) {
-                    // Android's audio policy may
-                    // grant a DIRECT thread for a compatible device/format, or safely fall back
-                    // to the mixed path. This deliberately does not promise exclusive output.
-                    return requireNotNull(
+                val baseSink = if (outputMode.usesUnmodifiedMedia3AudioSink) {
+                    requireNotNull(
                         super.buildAudioSink(
                             context,
                             false,
                             enableAudioOutputPlaybackParams
                         )
                     ) { "Media3 did not create its default AudioSink" }
-                }
-                return DefaultAudioSink.Builder(context)
-                    .setEnableFloatOutput(outputMode.usesFloatOutput)
-                    .setEnableAudioOutputPlaybackParameters(enableAudioOutputPlaybackParams)
-                    .setAudioProcessorChain(
-                        DefaultAudioSink.DefaultAudioProcessorChain(
-                            HiResSampleRateCapAudioProcessor(),
-                            SurroundDownmixProcessor()
+                } else {
+                    DefaultAudioSink.Builder(context)
+                        .setEnableFloatOutput(outputMode.usesFloatOutput)
+                        .setEnableAudioOutputPlaybackParameters(enableAudioOutputPlaybackParams)
+                        .setAudioProcessorChain(
+                            DefaultAudioSink.DefaultAudioProcessorChain(
+                                HiResSampleRateCapAudioProcessor(),
+                                SurroundDownmixProcessor()
+                            )
                         )
-                    )
-                    .build()
+                        .build()
+                }
+                return DirectUsbAudioSink(baseSink, usbDirectDacManager, preferences)
             }
 
             override fun buildVideoRenderers(

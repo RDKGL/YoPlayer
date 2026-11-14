@@ -349,4 +349,6 @@
     <string name="setcat_keep_screen_awake_title">Не выключать экран при воспроизведении</string>
     <string name="setcat_keep_screen_awake_subtitle">Предотвращает переход экрана в спящий режим, когда музыка играет и приложение видно.</string>
     <string name="setcat_playback_behavior">Воспроизведение</string>
+    <string name="usb_dac_exclusive_title">Эксклюзивный доступ к HQ звуку на USB</string>
+    <string name="usb_dac_exclusive_subtitle">Прямой вывод bit-perfect на внешний USB-ЦАП в обход системного микшера Android. Блокирует звук других приложений при подключении ЦАПа.</string>
 </resources>

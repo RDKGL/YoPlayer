@@ -280,6 +280,69 @@ constructor(
         val PLAYER_TITLE_ALIGNMENT = stringPreferencesKey("player_customizer_title_alignment")
         val PLAYER_TITLE_POSITION = stringPreferencesKey("player_customizer_title_position")
         val USB_DAC_EXCLUSIVE_ACCESS = booleanPreferencesKey("usb_dac_exclusive_access")
+
+        val TELEGRAM_API_ID = stringPreferencesKey("telegram_api_id")
+        val TELEGRAM_API_HASH = stringPreferencesKey("telegram_api_hash")
+        val TELEGRAM_PHONE_NUMBER = stringPreferencesKey("telegram_phone_number")
+        val TELEGRAM_SESSION_TOKEN = stringPreferencesKey("telegram_session_token")
+        val TELEGRAM_IS_LOGGED_IN = booleanPreferencesKey("telegram_is_logged_in")
+        val TELEGRAM_ENABLED_CHAT_IDS = stringSetPreferencesKey("telegram_enabled_chat_ids")
+        val TELEGRAM_IGNORE_VOICE_MESSAGES = booleanPreferencesKey("telegram_ignore_voice_messages")
+    }
+
+    val telegramEnabledChatIdsFlow: Flow<Set<String>> = dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.TELEGRAM_ENABLED_CHAT_IDS] ?: setOf("1") // "1" = Saved Messages by default
+    }.distinctUntilChanged()
+
+    val telegramIgnoreVoiceMessagesFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.TELEGRAM_IGNORE_VOICE_MESSAGES] ?: true
+    }.distinctUntilChanged()
+
+    suspend fun setTelegramEnabledChatIds(chatIds: Set<String>) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.TELEGRAM_ENABLED_CHAT_IDS] = chatIds
+        }
+    }
+
+    suspend fun setTelegramIgnoreVoiceMessages(ignore: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.TELEGRAM_IGNORE_VOICE_MESSAGES] = ignore
+        }
+    }
+
+    val telegramApiIdFlow: Flow<String> = dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.TELEGRAM_API_ID] ?: ""
+    }.distinctUntilChanged()
+
+    val telegramApiHashFlow: Flow<String> = dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.TELEGRAM_API_HASH] ?: ""
+    }.distinctUntilChanged()
+
+    val telegramLoggedInFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.TELEGRAM_IS_LOGGED_IN] ?: false
+    }.distinctUntilChanged()
+
+    suspend fun setTelegramApiCredentials(apiId: String, apiHash: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.TELEGRAM_API_ID] = apiId
+            preferences[PreferencesKeys.TELEGRAM_API_HASH] = apiHash
+        }
+    }
+
+    suspend fun setTelegramLoggedInState(loggedIn: Boolean, sessionToken: String = "", phoneNumber: String = "") {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.TELEGRAM_IS_LOGGED_IN] = loggedIn
+            preferences[PreferencesKeys.TELEGRAM_SESSION_TOKEN] = sessionToken
+            preferences[PreferencesKeys.TELEGRAM_PHONE_NUMBER] = phoneNumber
+        }
+    }
+
+    val exclusiveUsbAudioEnabledFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.USB_DAC_EXCLUSIVE_ACCESS] ?: false
+    }.distinctUntilChanged()
+
+    suspend fun setExclusiveUsbAudioEnabled(enabled: Boolean) {
+        dataStore.edit { preferences -> preferences[PreferencesKeys.USB_DAC_EXCLUSIVE_ACCESS] = enabled }
     }
 
     /** Null until the user picks a channel; the updater then follows the installed build. */

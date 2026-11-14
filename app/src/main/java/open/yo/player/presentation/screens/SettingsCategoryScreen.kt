@@ -1331,7 +1331,7 @@ fun SettingsCategoryScreen(
                             ) {
                                 SettingsItem(
                                     title = "О YoPlayer",
-                                    subtitle = "Версия 0.1.0",
+                                    subtitle = "Версия 0.1.1",
                                     leadingIcon = { Icon(Icons.Outlined.Info, null, tint = MaterialTheme.colorScheme.secondary) },
                                     trailingIcon = { Icon(Icons.Rounded.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant) },
                                     modifier = Modifier.settingHighlight("item_about_app", highlightKey),
@@ -1344,6 +1344,14 @@ fun SettingsCategoryScreen(
                                     trailingIcon = { Icon(Icons.Rounded.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant) },
                                     modifier = Modifier.settingHighlight("item_updates", highlightKey),
                                     onClick = { navController.navigateSafely(Screen.Updates.route) }
+                                )
+                                SettingsItem(
+                                    title = "Telegram Audio",
+                                    subtitle = "Настройка API ID, Hash и аккаунта Telegram",
+                                    leadingIcon = { Icon(painterResource(R.drawable.telegram), null, tint = MaterialTheme.colorScheme.secondary) },
+                                    trailingIcon = { Icon(Icons.Rounded.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant) },
+                                    modifier = Modifier.settingHighlight("item_telegram_settings", highlightKey),
+                                    onClick = { navController.navigateSafely(Screen.TelegramSettings.route) }
                                 )
                             }
                         }
