@@ -49,6 +49,8 @@ data class EqualizerUiState(
     val isLoudnessDismissed: Boolean = false,
     val customPresets: ImmutableList<EqualizerPreset> = persistentListOf(),
     val pinnedPresetsNames: ImmutableList<String> = persistentListOf(),
+    val selectedAutoEqProfile: open.yo.player.data.equalizer.AutoEqProfile? = null,
+    val autoEqProfiles: ImmutableList<open.yo.player.data.equalizer.AutoEqProfile> = persistentListOf()
 ) {
     val accessiblePresets: ImmutableList<EqualizerPreset>
         get() {
@@ -66,6 +68,7 @@ data class EqualizerUiState(
 class EqualizerViewModel @Inject constructor(
     private val equalizerManager: EqualizerManager,
     private val equalizerPreferencesRepository: EqualizerPreferencesRepository,
+    val autoEqRepository: open.yo.player.data.equalizer.AutoEqRepository,
     private val dualPlayerEngine: DualPlayerEngine,
     @param:AppScope private val appScope: CoroutineScope,
     @param:dagger.hilt.android.qualifiers.ApplicationContext private val context: android.content.Context
@@ -277,7 +280,8 @@ class EqualizerViewModel @Inject constructor(
             current.copy(
                 currentPreset = preset,
                 bandLevels = preset.bandLevels.toImmutableList(),
-                editingPresetName = null
+                editingPresetName = null,
+                selectedAutoEqProfile = null
             )
         }
         viewModelScope.launch {
@@ -285,6 +289,24 @@ class EqualizerViewModel @Inject constructor(
             if (!preset.isCustom) {
                 equalizerPreferencesRepository.setEqualizerCustomBands(preset.bandLevels)
             }
+        }
+    }
+
+    fun selectAutoEqProfile(profile: open.yo.player.data.equalizer.AutoEqProfile) {
+        val preset = profile.toEqualizerPreset()
+        persistBandLevelsJob?.cancel()
+        equalizerManager.applyPreset(preset)
+        _uiState.update { current ->
+            current.copy(
+                currentPreset = preset,
+                bandLevels = preset.bandLevels.toImmutableList(),
+                editingPresetName = null,
+                selectedAutoEqProfile = profile
+            )
+        }
+        viewModelScope.launch {
+            equalizerPreferencesRepository.setEqualizerPreset(preset.name)
+            equalizerPreferencesRepository.setEqualizerCustomBands(preset.bandLevels)
         }
     }
     

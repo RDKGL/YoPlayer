@@ -4,18 +4,21 @@ All notable changes to YoPlayer are documented in this file.
 
 ## [0.1.1] - 2026-03-30
 
-### 🎧 Bit-Perfect USB Audio Driver
-- Implemented **"Эксклюзивный доступ к HQ звуку на USB"** (Bit-Perfect Direct USB Audio access):
-  - Direct bit-perfect PCM audio streaming to external USB DACs bypassing Android system mixer.
-  - Native C++ lock-free PCM RingBuffer and isochronous transfer engine (`usb_dac_native`).
-  - Automatic sample rate (44.1 / 48 / 88.2 / 96 / 192 kHz) and bit depth configuration on track change without resampling.
-  - Automatic playback pause (`player.pause()`) and clean resource release when USB DAC cable is disconnected.
+### 🎧 Audiophile Engine & Bit-Perfect USB DAC
+- **Direct USB DAC Output Driver**: Native C++ lock-free PCM ring buffer engine streaming raw audio directly to external USB DACs, bypassing the Android system audio mixer.
+- **AutoEQ Headphone Integration**: Integrated AutoEQ target compensation profiles for popular headphones (Sony WH-1000XM4/XM5, Sennheiser HD 600/650, AirPods Pro/Max, KZ ZSN Pro, Audio-Technica ATH-M50x, Galaxy Buds2 Pro, etc.) with Harman Target curves.
+- **Enhanced Audio Quality Badge**: Now Playing screen displays real-time bit depth (16-bit / 24-bit / 32-bit), sample rate (kHz), bitrate (kbps), and an active `⚡ Bit-Perfect USB` indicator.
+
+### 🧠 Smart YoMix Engine
+- **Upgraded Recommendation Algorithm**: Dynamically generates queues balancing play counts, completion rate, favorite status, artist/genre similarity, and recency penalty.
+- **Continuous Queue Auto-Fill**: Automatically appends matching smart recommendations when approaching the end of queue.
 
 ### 🎨 UI & Ergonomics
-- Swapped action buttons in Now Playing for better ergonomics:
-  - **Favorite Heart (`♡`)**: Placed next to song title at the top.
-  - **Lyrics (`🎵`)**: Placed in the bottom action bar.
-- Fully removed Audio Bookmarks (`🔖`) from Now Playing top bar and Library.
+- **Player View Customizer**: Added customizable track title alignment (Left / Center) and vertical position settings with live preview.
+- **Ergonomic Button Swaps**:
+  - Moved **Favorite Heart (`♡`)** next to the track title at the top.
+  - Moved **Lyrics (`🎵`)** to the bottom action bar.
+- Fully removed legacy Bookmarks button and navigation items.
 
 ## [0.1.0] - 2026-03-30
 - Initial release of YoPlayer (`open.yo.player`).

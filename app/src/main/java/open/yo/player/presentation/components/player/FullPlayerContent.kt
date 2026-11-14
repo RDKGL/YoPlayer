@@ -241,6 +241,7 @@ fun FullPlayerContent(
     val playerTitlePosition by playerViewModel.playerTitlePosition.collectAsStateWithLifecycle()
 
     val fullPlayerSlice by playerViewModel.fullPlayerSlice.collectAsStateWithLifecycle()
+    val isUsbDacActive by playerViewModel.isUsbDacActive.collectAsStateWithLifecycle()
     val currentSongArtists = fullPlayerSlice.currentSongArtists
     val lyricsSyncOffset = fullPlayerSlice.lyricsSyncOffset
     val albumArtQuality = fullPlayerSlice.albumArtQuality
@@ -516,6 +517,8 @@ fun FullPlayerContent(
             playbackMetadataMimeType = playbackAudioMetadata.mimeType,
             playbackMetadataBitrate = playbackAudioMetadata.bitrate,
             playbackMetadataSampleRate = playbackAudioMetadata.sampleRate,
+            playbackMetadataBitDepth = playbackAudioMetadata.bitDepth,
+            isUsbDacActive = isUsbDacActive,
             currentPositionProvider = currentPositionProvider,
             totalDurationValue = totalDurationValue,
             showPlayerFileInfo = showPlayerFileInfo,
@@ -1083,6 +1086,8 @@ private fun FullPlayerProgressSection(
     playbackMetadataMimeType: String?,
     playbackMetadataBitrate: Int?,
     playbackMetadataSampleRate: Int?,
+    playbackMetadataBitDepth: Int?,
+    isUsbDacActive: Boolean,
     currentPositionProvider: () -> Long,
     totalDurationValue: Long,
     showPlayerFileInfo: Boolean,
@@ -1112,6 +1117,9 @@ private fun FullPlayerProgressSection(
     } else {
         song.sampleRate
     }
+    val audioBitDepth = if (isMetadataForCurrentSong) {
+        playbackMetadataBitDepth
+    } else null
 
     PlayerProgressBarSection(
         songId = song.id,
@@ -1121,6 +1129,8 @@ private fun FullPlayerProgressSection(
         audioMimeType = audioMimeType,
         audioBitrate = audioBitrate,
         audioSampleRate = audioSampleRate,
+        audioBitDepth = audioBitDepth,
+        isUsbDacActive = isUsbDacActive,
         showAudioFileInfo = showPlayerFileInfo,
         onSeek = onSeek,
         expansionFractionProvider = expansionFractionProvider,
@@ -1515,12 +1525,22 @@ private fun SongMetadataDisplaySection(
     }
 }
 
-private fun formatAudioMetaLabel(mimeType: String?, bitrate: Int?, sampleRate: Int?): String? {
+private fun formatAudioMetaLabel(
+    mimeType: String?,
+    bitrate: Int?,
+    sampleRate: Int?,
+    bitDepth: Int?,
+    isUsbDacActive: Boolean = false
+): String? {
     val formatLabel = mimeTypeToFormat(mimeType)
         .takeIf { it != "-" }
         ?.uppercase(Locale.getDefault())
 
     val parts = buildList {
+        if (isUsbDacActive) {
+            add("⚡ Bit-Perfect USB")
+        }
+        bitDepth?.takeIf { it > 0 }?.let { add("${it}-bit") }
         sampleRate?.takeIf { it > 0 }?.let { add(String.format(Locale.US, "%.1f kHz", it / 1000.0)) }
         bitrate?.takeIf { it > 0 }?.let { bitrateValue ->
             val kbpsLabel = "${bitrateValue / 1000} kbps"
@@ -1543,6 +1563,8 @@ private fun PlayerProgressBarSection(
     audioMimeType: String?,
     audioBitrate: Int?,
     audioSampleRate: Int?,
+    audioBitDepth: Int?,
+    isUsbDacActive: Boolean,
     showAudioFileInfo: Boolean,
     onSeek: (Long) -> Unit,
     expansionFractionProvider: () -> Float,
@@ -1578,12 +1600,14 @@ private fun PlayerProgressBarSection(
         kotlin.math.abs(reportedDuration - hintDuration) <= 1500L -> reportedDuration
         else -> minOf(reportedDuration, hintDuration)
     }
-    val audioMetaLabel = remember(showAudioFileInfo, audioMimeType, audioBitrate, audioSampleRate) {
-        if (showAudioFileInfo) {
+    val audioMetaLabel = remember(showAudioFileInfo, audioMimeType, audioBitrate, audioSampleRate, audioBitDepth, isUsbDacActive) {
+        if (showAudioFileInfo || isUsbDacActive) {
             formatAudioMetaLabel(
                 mimeType = audioMimeType,
                 bitrate = audioBitrate,
-                sampleRate = audioSampleRate
+                sampleRate = audioSampleRate,
+                bitDepth = audioBitDepth,
+                isUsbDacActive = isUsbDacActive
             )
         } else {
             null

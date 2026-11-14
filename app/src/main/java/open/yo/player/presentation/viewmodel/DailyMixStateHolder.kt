@@ -155,6 +155,23 @@ class DailyMixStateHolder @Inject constructor(
     }
 
     /**
+     * Dynamically generates a smart batch of YoMix songs to extend active playback queue.
+     */
+    suspend fun generateYoMixBatch(
+        currentQueueSongIds: Set<String>,
+        favoriteSongIds: Set<String>,
+        batchSize: Int = 20
+    ): List<Song> {
+        val allSongs = musicRepository.getAllSongsOnce()
+        return dailyMixManager.generateNextYoMixBatch(
+            allSongs = allSongs,
+            currentQueueSongIds = currentQueueSongIds,
+            favoriteSongIds = favoriteSongIds,
+            batchSize = batchSize
+        )
+    }
+
+    /**
      * Load persisted daily mix from storage using direct DB queries by IDs
      * instead of combining with the full allSongs flow.
      */

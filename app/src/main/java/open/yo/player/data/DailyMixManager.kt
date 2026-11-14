@@ -478,6 +478,27 @@ class DailyMixManager @Inject constructor(
         return orderedResult.take(limit.coerceAtMost(orderedResult.size))
     }
 
+    /**
+     * Generates a dynamic batch of smart recommendations to append to the active queue.
+     * Excludes tracks already in [currentQueueSongIds] and enforces artist/genre diversity.
+     */
+    suspend fun generateNextYoMixBatch(
+        allSongs: List<Song>,
+        currentQueueSongIds: Set<String>,
+        favoriteSongIds: Set<String> = emptySet(),
+        batchSize: Int = 20
+    ): List<Song> {
+        if (allSongs.isEmpty()) return emptyList()
+        val availableSongs = allSongs.filterNot { currentQueueSongIds.contains(it.id) }
+        if (availableSongs.isEmpty()) return emptyList()
+
+        val seed = System.currentTimeMillis() / 60000L
+        val random = java.util.Random(seed)
+        val rankedSongs = computeRankedSongs(availableSongs, favoriteSongIds, random)
+        val diversityState = DiversityState()
+        return pickWithDiversity(rankedSongs, favoriteSongIds, batchSize.coerceAtMost(availableSongs.size), diversityState)
+    }
+
     private fun pickWithDiversity(
         rankedSongs: List<RankedSong>,
         favoriteSongIds: Set<String>,

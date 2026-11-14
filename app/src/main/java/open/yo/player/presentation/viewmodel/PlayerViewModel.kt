@@ -301,8 +301,20 @@ class PlayerViewModel @Inject constructor(
     val playlistSelectionStateHolder: PlaylistSelectionStateHolder,
     private val sessionToken: SessionToken,
     private val mediaControllerFactory: open.yo.player.data.media.MediaControllerFactory,
+    private val usbDirectDacManager: open.yo.player.data.usb.UsbDirectDacManager,
     private val dispatchers: DispatcherProvider
 ) : ViewModel() {
+
+    val isUsbDacActive: StateFlow<Boolean> = combine(
+        usbDirectDacManager.dacState,
+        userPreferencesRepository.exclusiveUsbAudioEnabledFlow
+    ) { dacState, exclusiveEnabled ->
+        exclusiveEnabled && dacState is open.yo.player.data.usb.UsbDacState.Connected
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = false
+    )
 
     private val _playerUiState = MutableStateFlow(PlayerUiState())
     val playerUiState: StateFlow<PlayerUiState> = _playerUiState.asStateFlow()
