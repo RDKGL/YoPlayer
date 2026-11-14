@@ -254,7 +254,15 @@ class DualPlayerEngine @Inject constructor(
 
     init {
         usbDirectDacManager.setOnPausePlayerCallback {
-            if (::playerA.isInitialized) playerA.pause()
+            if (::playerA.isInitialized) {
+                if (android.os.Looper.myLooper() == android.os.Looper.getMainLooper()) {
+                    playerA.pause()
+                } else {
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        if (::playerA.isInitialized) playerA.pause()
+                    }
+                }
+            }
         }
     }
 

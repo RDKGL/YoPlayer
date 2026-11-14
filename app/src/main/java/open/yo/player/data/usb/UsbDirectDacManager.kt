@@ -290,7 +290,9 @@ class UsbDirectDacManager @Inject constructor(
     }
 
     fun handleDisconnect() {
-        onPausePlayerCallback?.invoke()
+        scope.launch(Dispatchers.Main) {
+            onPausePlayerCallback?.invoke()
+        }
         
         try {
             if (isNativeLibLoaded) {
