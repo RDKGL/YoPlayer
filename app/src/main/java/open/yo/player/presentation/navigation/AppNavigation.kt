@@ -758,17 +758,6 @@ fun AppNavigation(
                     playerViewModel = playerViewModel
                 )
             }
-            composable(
-                Screen.TelegramSettings.route,
-                enterTransition = { enterTransition() },
-                exitTransition = { exitTransition() },
-                popEnterTransition = { popEnterTransition() },
-                popExitTransition = { popExitTransition() },
-            ) {
-                TelegramSettingsScreen(
-                    onBack = { navController.popBackStack() }
-                )
-            }
         }
     }
 }

@@ -1345,14 +1345,6 @@ fun SettingsCategoryScreen(
                                     modifier = Modifier.settingHighlight("item_updates", highlightKey),
                                     onClick = { navController.navigateSafely(Screen.Updates.route) }
                                 )
-                                SettingsItem(
-                                    title = "Telegram Audio",
-                                    subtitle = "Настройка API ID, Hash и аккаунта Telegram",
-                                    leadingIcon = { Icon(painterResource(R.drawable.telegram), null, tint = MaterialTheme.colorScheme.secondary) },
-                                    trailingIcon = { Icon(Icons.Rounded.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant) },
-                                    modifier = Modifier.settingHighlight("item_telegram_settings", highlightKey),
-                                    onClick = { navController.navigateSafely(Screen.TelegramSettings.route) }
-                                )
                             }
                         }
                         SettingsCategory.EQUALIZER -> {
