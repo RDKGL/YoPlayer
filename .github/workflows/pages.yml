@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - site
   workflow_dispatch:
 
 permissions:
@@ -31,7 +32,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: './YoPlayer Site'
 
       - name: Deploy to GitHub Pages
         id: deployment
