@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>YoPlayer — Material Design 3 TikTok Promo Studio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --stage-bg-1: #282927;
+      --stage-bg-2: #3C3D3A;
+      --phone-surface: #3C3D3A;
+      --surface-chip: rgba(14, 14, 14, 0.34);
+      --pill-dark: #0E0E0E;
+      --pill-bar: #121211;
+      --control-light: #E6E6E3;
+      --on-control: #151514;
+      --text-main: #E6E6E3;
+      --text-bright: #FFFFFF;
+      --text-muted: #9E9F9B;
+      --glow-a: rgba(230, 230, 227, 0.11);
+      --glow-b: rgba(14, 14, 14, 0.48);
+      --accent-ring: rgba(230, 230, 227, 0.28);
+    }
+
+    [data-theme="violet"] {
+      --stage-bg-1: #161321;
+      --stage-bg-2: #241E33;
+      --phone-surface: #241E33;
+      --surface-chip: rgba(12, 9, 20, 0.42);
+      --pill-dark: #0E0A16;
+      --pill-bar: #120D1D;
+      --control-light: #D4C2FF;
+      --on-control: #23124B;
+      --text-main: #F1EBFC;
+      --text-bright: #FFFFFF;
+      --text-muted: #B0A7C6;
+      --glow-a: rgba(212, 194, 255, 0.18);
+      --glow-b: rgba(62, 40, 112, 0.34);
+      --accent-ring: rgba(212, 194, 255, 0.38);
+    }
+
+    [data-theme="emerald"] {
+      --stage-bg-1: #111A15;
+      --stage-bg-2: #1C2B23;
+      --phone-surface: #1C2B23;
+      --surface-chip: rgba(8, 16, 12, 0.42);
+      --pill-dark: #09100C;
+      --pill-bar: #0D1611;
+      --control-light: #93E2B0;
+      --on-control: #063219;
+      --text-main: #E7F2EB;
+      --text-bright: #FFFFFF;
+      --text-muted: #9BB5A6;
+      --glow-a: rgba(147, 226, 176, 0.16);
+      --glow-b: rgba(22, 74, 46, 0.34);
+      --accent-ring: rgba(147, 226, 176, 0.36);
+    }
+
+    [data-theme="terracotta"] {
+      --stage-bg-1: #1D1411;
+      --stage-bg-2: #2E211C;
+      --phone-surface: #2E211C;
+      --surface-chip: rgba(18, 11, 9, 0.42);
+      --pill-dark: #100B09;
+      --pill-bar: #160F0D;
+      --control-light: #FFBCA4;
+      --on-control: #461708;
+      --text-main: #F6EAE5;
+      --text-bright: #FFFFFF;
+      --text-muted: #C2ACA3;
+      --glow-a: rgba(255, 188, 164, 0.17);
+      --glow-b: rgba(102, 46, 28, 0.32);
+      --accent-ring: rgba(255, 188, 164, 0.36);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0E0F0E;
+      color: #E6E6E3;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display { font-family: 'Manrope', 'Inter', sans-serif; }
+
+    .studio-shell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100dvh;
+      padding: 10px 12px 12px;
+      gap: 10px;
+      background: #0E0F0E;
+    }
+
+    body.record-mode .studio-shell { padding: 0; gap: 0; justify-content: center; background: #000000; }
+    body.record-mode .studio-chrome { display: none !important; }
+    body.record-mode .stage-viewport { border-radius: 0 !important; box-shadow: none !important; }
+
+    #exitRecordBtn { opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    body.record-mode #exitRecordBtn { pointer-events: auto; opacity: 0; }
+    body.record-mode #exitRecordBtn:hover,
+    body.record-mode #exitRecordBtn:focus { opacity: 0.92; }
+
+    .stage-wrapper {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stage-viewport {
+      position: relative;
+      overflow: hidden;
+      border-radius: 26px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 26px 68px rgba(0, 0, 0, 0.75);
+      background: var(--stage-bg-1);
+      flex-shrink: 0;
+    }
+
+    .stage-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 396px;
+      height: 704px;
+      transform-origin: top left;
+      overflow: hidden;
+      background: linear-gradient(168deg, var(--stage-bg-1) 0%, var(--stage-bg-2) 100%);
+      transition: background 0.35s ease;
+      perspective: 1100px;
+      contain: layout style paint;
+    }
+
+    .ambient-glow-1 {
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      top: -90px;
+      left: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glow-a) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      bottom: -120px;
+      right: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glow-b) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .top-progress-track {
+      position: absolute;
+      top: 10px;
+      left: 16px;
+      right: 16px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      z-index: 40;
+      overflow: hidden;
+    }
+
+    .top-progress-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--control-light);
+      transform-origin: left center;
+      transform: scaleX(0);
+      will-change: transform;
+    }
+
+    .yo-icon {
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.58);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .yo-icon img {
+      width: 76%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      animation: yoLogoPulse 1.4s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    @keyframes yoLogoPulse {
+      0%   { transform: scale(0.96); opacity: 0.94; }
+      100% { transform: scale(1.03); opacity: 1; }
+    }
+
+    .mini-wave { display: flex; align-items: center; gap: 2.5px; height: 16px; }
+    .mini-wave span {
+      width: 2.5px;
+      border-radius: 999px;
+      background: #FFFFFF;
+      animation: miniWaveAnim 0.85s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .mini-wave span:nth-child(1) { height: 7px; animation-delay: -0.5s; }
+    .mini-wave span:nth-child(2) { height: 14px; animation-delay: 0s; }
+    .mini-wave span:nth-child(3) { height: 9px; animation-delay: -0.25s; }
+
+    @keyframes miniWaveAnim {
+      0%   { transform: scaleY(0.55); }
+      100% { transform: scaleY(1.15); }
+    }
+
+    .paused-anims .yo-bar,
+    .paused-anims .mini-wave span,
+    .paused-anims .wave-svg-track,
+    .paused-anims .shimmer-pill::after {
+      animation-play-state: paused !important;
+    }
+
+    .wavy-seek { position: relative; width: 100%; height: 18px; display: flex; align-items: center; }
+    .wavy-inactive { position: absolute; left: 0; right: 0; height: 3px; border-radius: 999px; background: rgba(255, 255, 255, 0.22); }
+    .wavy-inactive::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--control-light);
+      transform: translateY(-50%);
+    }
+    .wavy-active-clip { position: absolute; left: 0; top: 0; height: 18px; overflow: hidden; width: 52%; will-change: width; }
+    .wave-svg-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 340px;
+      height: 18px;
+      color: var(--control-light);
+      animation: waveSlide 1.15s linear infinite;
+      will-change: transform;
+    }
+    @keyframes waveSlide { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-24px, 0, 0); } }
+    .wavy-thumb {
+      position: absolute;
+      top: 50%;
+      left: 52%;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--control-light);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
+      transform: translate3d(-50%, -50%, 0);
+      will-change: left;
+    }
+
+    .scene-layer { position: absolute; inset: 0; pointer-events: none; will-change: transform, opacity; }
+
+    .phone-frame {
+      position: absolute;
+      left: 50%;
+      top: 52.5%;
+      width: 312px;
+      height: 616px;
+      margin-left: -156px;
+      margin-top: -308px;
+      border-radius: 40px;
+      background: #0D0D0D;
+      padding: 8px;
+      box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.16), 0 30px 68px rgba(0, 0, 0, 0.72);
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+
+    .phone-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 33px;
+      overflow: hidden;
+      background: var(--phone-surface);
+      color: var(--text-main);
+      transition: background 0.35s ease;
+    }
+
+    .phone-subscreen { position: absolute; inset: 0; display: flex; flex-direction: column; will-change: transform, opacity; }
+
+    .cover-art-box {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 48%, #342E28 0%, #1C1815 68%, #100E0C 100%);
+    }
+    .cover-art-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+    .has-custom-cover .cover-art-img { display: block; }
+    .has-custom-cover .default-cover-art { display: none; }
+
+    .tap-ripple {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2.5px solid #FFFFFF;
+      background: rgba(255, 255, 255, 0.35);
+      pointer-events: none;
+      opacity: 0;
+      transform: translate3d(-50%, -50%, 0) scale(0.3);
+      will-change: transform, opacity;
+      z-index: 30;
+    }
+
+    .lyrics-viewport {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      margin-top: 2px;
+      margin-bottom: 4px;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 83%, transparent 100%);
+    }
+
+    .lyrics-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      padding: 0 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      will-change: transform;
+    }
+
+    .lyric-line {
+      font-family: 'Manrope', 'Inter', sans-serif;
+      font-size: 18.5px;
+      line-height: 1.24;
+      font-weight: 700;
+      text-align: center;
+      color: var(--text-main);
+      opacity: 0.88;
+      filter: blur(0px);
+      transform: scale(1);
+      transition: opacity 0.36s ease, filter 0.38s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.32s ease, text-shadow 0.32s ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .lyrics-synced .lyric-line { opacity: 0.38; filter: blur(1.5px); transform: scale(0.95); }
+    .lyrics-synced .lyric-line.active {
+      opacity: 1;
+      filter: blur(0px);
+      color: #FFFFFF;
+      text-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
+      transform: scale(1.07);
+    }
+
+    .mode-switcher { position: relative; flex: 1; height: 38px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .mode-btn-bg { border-radius: 10px; background: rgba(14, 14, 14, 0.58); }
+    .mode-active-pill {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: calc(50% - 2px);
+      border-radius: 999px;
+      background: var(--control-light);
+      transform: translate3d(calc(100% + 4px), 0, 0);
+      transition: transform 0.44s cubic-bezier(0.22, 1.15, 0.36, 1);
+      will-change: transform;
+    }
+    .mode-switcher.is-synced .mode-active-pill { transform: translate3d(0, 0, 0); }
+    .mode-label {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 9.5px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: color 0.28s ease;
+    }
+    .mode-switcher:not(.is-synced) .mode-label-static,
+    .mode-switcher.is-synced .mode-label-synced { color: var(--on-control); }
+
+    .shimmer-pill {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 30px var(--accent-ring), 0 14px 32px rgba(0, 0, 0, 0.5);
+    }
+    .shimmer-pill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 65%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.28) 50%, transparent 100%);
+      transform: skewX(-22deg);
+      animation: repoShimmer 2.6s ease-in-out infinite;
+    }
+    @keyframes repoShimmer { 0% { left: -120%; } 55% { left: 145%; } 100% { left: 145%; } }
+
+    .studio-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.72);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .studio-pill:hover { background: rgba(255, 255, 255, 0.12); color: #FFFFFF; }
+    .studio-pill.active { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.55); color: #FFFFFF; }
+
+    .timeline-track { position: relative; height: 24px; display: flex; align-items: center; cursor: pointer; touch-action: none; }
+    .timeline-rail { position: relative; width: 100%; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); }
+    .timeline-fill { position: absolute; top: 0; left: 0; height: 100%; border-radius: 999px; background: #E6E6E3; width: 0%; pointer-events: none; }
+    .timeline-thumb {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(230, 230, 227, 0.3), 0 2px 6px rgba(0, 0, 0, 0.5);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .scene-marker {
+      position: absolute;
+      top: 50%;
+      width: 2px;
+      height: 10px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.45);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body data-theme="graphite">
+
+  <input id="coverInput" type="file" accept="image/*" class="hidden" />
+
+  <button id="exitRecordBtn" class="fixed top-3 right-3 z-50 px-3 py-1.5 rounded-full bg-black/80 border border-white/20 text-[11px] font-bold text-white shadow-lg" title="Выйти из режима записи (ESC)">
+    ✕ Выйти (ESC)
+  </button>
+
+  <div id="toastBox" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 -translate-y-2">
+    <div class="px-4 py-2 rounded-full bg-[#191A19]/95 border border-white/15 text-xs font-semibold text-white shadow-2xl flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+      <span id="toastText">Обложка обновлена</span>
+    </div>
+  </div>
+
+  <div class="studio-shell">
+    <!-- TOP BAR -->
+    <header class="studio-chrome w-full max-w-[960px] flex flex-wrap items-center justify-between gap-2 px-1">
+      <div class="flex flex-wrap items-center gap-2">
+        <div class="flex items-center gap-2 mr-1">
+          <div class="w-8 h-8 rounded-[10px] bg-black border border-white/15 flex items-center justify-center p-1.5 shrink-0">
+            <img src="logo.png" alt="YoPlayer" class="w-full h-auto object-contain" />
+          </div>
+          <div class="leading-tight hidden md:block">
+            <div class="font-display font-extrabold text-sm text-white">YoPlayer</div>
+            <div class="text-[10px] text-white/50">Material Design 3 • 9:16</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap" role="group" aria-label="Темы">
+          <button class="studio-pill theme-btn active" data-theme-pick="graphite">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#E6E6E3]"></span>
+            <span>Graphite</span>
+          </button>
+          <button class="studio-pill theme-btn" data-theme-pick="violet">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#D4C2FF]"></span>
+            <span class="hidden sm:inline">Violet</span>
+          </button>
+          <button class="studio-pill theme-btn" data-theme-pick="emerald">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#93E2B0]"></span>
+            <span class="hidden sm:inline">Emerald</span>
+          </button>
+          <button class="studio-pill theme-btn" data-theme-pick="terracotta">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FFBCA4]"></span>
+            <span class="hidden sm:inline">Terracotta</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+        <button id="soundToggleBtn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/[0.08] hover:bg-white/15 border border-white/12 text-white transition active:scale-95" title="Включить / выключить звук (M)">
+          <svg id="iconSoundOn" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <svg id="iconSoundOff" class="w-3.5 h-3.5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          <span id="soundLabel">Звук</span>
+        </button>
+
+        <button id="uploadCoverBtn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-white/[0.08] hover:bg-white/15 border border-white/12 text-white transition active:scale-95">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span class="hidden sm:inline">Загрузить обложку</span>
+          <span class="sm:hidden">Обложка</span>
+        </button>
+
+        <div class="inline-flex items-center rounded-full bg-white/[0.06] border border-white/12 p-0.5 text-[11px] font-mono font-bold">
+          <button class="speed-btn px-2 py-1 rounded-full text-white/60 hover:text-white transition" data-speed="0.75">0.75x</button>
+          <button class="speed-btn px-2 py-1 rounded-full bg-white/20 text-white transition" data-speed="1">1x</button>
+          <button class="speed-btn px-2 py-1 rounded-full text-white/60 hover:text-white transition" data-speed="1.25">1.25x</button>
+        </div>
+
+        <button id="recordModeBtn" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-[#E6E6E3] hover:bg-white text-[#141414] shadow-lg transition active:scale-95">
+          <span class="w-2 h-2 rounded-full bg-red-600"></span>
+          <span>Запись 9:16</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- CENTERED 9:16 VERTICAL PHONE STAGE -->
+    <main class="stage-wrapper" id="stageWrapper">
+      <div class="stage-viewport" id="stageViewport">
+        <div class="stage-canvas" id="stageCanvas">
+
+          <div class="ambient-glow-1"></div>
+          <div class="ambient-glow-2"></div>
+
+          <div class="top-progress-track">
+            <div class="top-progress-fill" id="topProgressFill"></div>
+          </div>
+
+          <!-- ============================================================
+               SCENE 1 (0.0s–2.4s): KINETIC M3 INTRO
+               ============================================================ -->
+          <section id="sceneIntro" class="scene-layer flex flex-col items-center justify-center px-6 text-center">
+            <div id="introIcon" class="yo-icon w-[124px] h-[124px] rounded-[34px] mb-6">
+              <img src="logo.png" alt="YoPlayer Logo" />
+            </div>
+
+            <h1 id="introTitle" class="font-display text-[46px] font-extrabold tracking-tight leading-none" style="color: var(--text-bright);">
+              YoPlayer
+            </h1>
+
+            <p id="introSub" class="mt-2.5 text-[16.5px] font-bold tracking-tight" style="color: var(--text-main);">
+              Локальный Hi-Res плеер
+            </p>
+
+            <p id="introTagline" class="mt-1 text-[12.5px] font-medium" style="color: var(--text-muted);">
+              USB ЦАП Bit-Perfect • Встроенный Soulseek • Тексты
+            </p>
+
+            <div class="mt-7 flex flex-wrap items-center justify-center gap-2">
+              <span id="introChip1" class="px-4 py-2 rounded-full text-[12px] font-extrabold shadow-md" style="background: var(--control-light); color: var(--on-control);">
+                FLAC 24-bit
+              </span>
+              <span id="introChip2" class="px-4 py-2 rounded-full text-[12px] font-bold border border-white/12 shadow-md" style="background: var(--pill-dark); color: var(--text-bright);">
+                USB ЦАП
+              </span>
+              <span id="introChip3" class="px-4 py-2 rounded-full text-[12px] font-bold border border-white/12 shadow-md" style="background: var(--pill-dark); color: var(--control-light);">
+                Soulseek
+              </span>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               SCENES 2, 3 & 4 (2.4s–17.6s): 3D PHONE (PLAYER -> LYRICS -> SOULSEEK)
+               ============================================================ -->
+          <section id="scenePhone" class="scene-layer">
+
+            <!-- Floating M3 Callout Badge Above Phone -->
+            <div id="lyricsTopBadge" class="absolute top-[22px] left-1/2 -translate-x-1/2 z-30 whitespace-nowrap px-4 py-1.5 rounded-full text-[11.5px] font-extrabold shadow-xl border border-white/15" style="background: var(--pill-dark); color: var(--control-light); opacity: 0;">
+              Онлайн-тексты • Синхронизация
+            </div>
+
+            <div id="soulseekTopBadge" class="absolute top-[22px] left-1/2 -translate-x-1/2 z-30 whitespace-nowrap px-4 py-1.5 rounded-full text-[11.5px] font-extrabold shadow-xl border border-white/15" style="background: var(--pill-dark); color: var(--control-light); opacity: 0;">
+              Встроенный Soulseek • Загрузка FLAC
+            </div>
+
+            <div id="phoneFrame" class="phone-frame">
+              <div class="phone-screen">
+
+                <!-- ======== SCENE 2 (2.4s–6.2s): NOW PLAYING SCREEN ======== -->
+                <div id="subPlayer" class="phone-subscreen px-4 pt-2.5 pb-3.5 justify-between">
+                  <div class="flex items-center justify-between text-[10px] font-bold px-0.5">
+                    <div class="flex items-center gap-1.5">
+                      <span class="px-2 py-0.5 rounded-full bg-black/35 text-white tracking-tight">18:34:09</span>
+                      <span class="px-2 py-0.5 rounded-full bg-black/25 text-white/85 font-semibold text-[9px]">Бычье Л...</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-white">
+                      <span class="text-[9.5px] tracking-tight">LTE</span>
+                      <span class="px-1.5 py-0.5 rounded-[5px] bg-[#F2C94C] text-[#141414] font-extrabold text-[9px] leading-none">56</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between mt-1.5">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: var(--surface-chip);">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                      </div>
+                      <span class="text-[13.5px] font-semibold tracking-tight">Сейчас играет</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: var(--surface-chip);">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="14" r="4"/><line x1="12" y1="6" x2="12.01" y2="6"/></svg>
+                      </div>
+                      <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background: var(--surface-chip);">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V6"/><path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/><path d="M12 12H3"/><path d="M16 6H3"/><path d="M12 18H3"/></svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between mt-2">
+                    <div>
+                      <div class="font-display text-[19px] font-extrabold leading-tight tracking-tight" style="color: var(--text-bright);">Бычье Лыко</div>
+                      <div class="text-[12.5px] font-medium mt-0.5" style="color: var(--text-muted);">Протоприкус</div>
+                    </div>
+                    <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background: var(--surface-chip);">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                    </div>
+                  </div>
+
+                  <div class="cover-art-box has-custom-cover w-full aspect-square rounded-[20px] mt-2.5 shadow-xl border border-white/10">
+                    <img class="cover-art-img" src="cover.jpg" alt="Бычье Лыко — Протоприкус" />
+                    <div class="default-cover-art w-full h-full flex flex-col items-center justify-between py-2.5 px-5 select-none">
+                      <span class="text-[11px] tracking-wide text-[#DEDAD0]/90" style="font-family: Georgia, serif;">Протоприкус</span>
+                      <div class="w-full flex-1 my-1.5 rounded-[3px] relative overflow-hidden border border-black/50" style="background: linear-gradient(135deg, #C7C4BB 0%, #8A8982 56%, #4C5754 100%);">
+                        <div class="absolute inset-0" style="background: radial-gradient(circle at 54% 76%, rgba(16,28,28,0.92) 0%, rgba(88,132,128,0.52) 38%, transparent 72%);"></div>
+                        <svg viewBox="0 0 200 170" class="absolute inset-0 w-full h-full opacity-80">
+                          <g fill="#23221F">
+                            <circle cx="30" cy="60" r="8"/><rect x="20" y="70" width="20" height="44" rx="7" transform="rotate(-14 30 70)"/>
+                            <circle cx="54" cy="46" r="8"/><rect x="44" y="56" width="20" height="46" rx="7" transform="rotate(-9 54 56)"/>
+                            <circle cx="80" cy="38" r="8"/><rect x="70" y="48" width="20" height="46" rx="7" transform="rotate(-4 80 48)"/>
+                            <circle cx="106" cy="36" r="8"/><rect x="96" y="46" width="20" height="46" rx="7"/>
+                            <circle cx="132" cy="40" r="8"/><rect x="122" y="50" width="20" height="46" rx="7" transform="rotate(5 132 50)"/>
+                            <circle cx="156" cy="50" r="8"/><rect x="146" y="60" width="20" height="46" rx="7" transform="rotate(10 156 60)"/>
+                            <circle cx="176" cy="66" r="8"/><rect x="166" y="76" width="20" height="44" rx="7" transform="rotate(16 176 76)"/>
+                          </g>
+                        </svg>
+                      </div>
+                      <span class="text-[10.5px] tracking-wider text-[#CFCBC0]/90" style="font-family: Georgia, serif;">бычье лыко</span>
+                    </div>
+                  </div>
+
+                  <div class="mt-2.5">
+                    <div class="wavy-seek">
+                      <div class="wavy-inactive"></div>
+                      <div id="playerWaveClip" class="wavy-active-clip" style="width: 52%;">
+                        <svg class="wave-svg-track" viewBox="0 0 340 18" fill="none">
+                          <path d="M0 9 Q6 3 12 9 T24 9 T36 9 T48 9 T60 9 T72 9 T84 9 T96 9 T108 9 T120 9 T132 9 T144 9 T156 9 T168 9 T180 9 T192 9 T204 9 T216 9 T228 9 T240 9 T252 9 T264 9 T276 9 T288 9 T300 9 T312 9 T324 9 T336 9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                      <div id="playerWaveThumb" class="wavy-thumb" style="left: 52%;"></div>
+                    </div>
+
+                    <div class="flex items-center justify-between mt-1.5 text-[9.5px] font-bold">
+                      <span id="playerCurTime">18:03</span>
+                      <span class="px-2.5 py-1 rounded-full text-[8.2px] font-semibold tracking-tight" style="background: var(--surface-chip); color: var(--text-main);">
+                        24-bit • 44.1 kHz • 924 kbps • FLAC
+                      </span>
+                      <span>20:39</span>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-2 mt-2.5">
+                    <div class="h-[52px] rounded-full flex items-center justify-center" style="background: var(--control-light); color: var(--on-control);">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+                    </div>
+                    <div class="h-[52px] rounded-[18px] flex items-center justify-center" style="background: var(--control-light); color: var(--on-control);">
+                      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.5"/><rect x="14" y="4" width="4" height="16" rx="1.5"/></svg>
+                    </div>
+                    <div class="h-[52px] rounded-full flex items-center justify-center" style="background: var(--control-light); color: var(--on-control);">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                    </div>
+                  </div>
+
+                  <div class="mx-4 mt-2.5 h-[42px] rounded-full p-1 grid grid-cols-3 gap-1 relative" style="background: var(--pill-bar);">
+                    <div class="rounded-full bg-white/[0.06] flex items-center justify-center">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+                    </div>
+                    <div class="rounded-full flex items-center justify-center" style="background: var(--control-light); color: var(--on-control);">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+                    </div>
+                    <div class="rounded-full bg-white/[0.06] flex items-center justify-center relative">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg>
+                      <div id="lyricsBtnRipple" class="tap-ripple left-1/2 top-1/2"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ======== SCENE 3 (6.2s–12.2s): ANIMATED ONLINE LYRICS SCREEN ======== -->
+                <div id="subLyrics" class="phone-subscreen px-3.5 pt-2.5 pb-3.5" style="opacity: 0; pointer-events: none;">
+                  <div class="flex items-center justify-between text-[10px] font-bold px-1">
+                    <div class="flex items-center gap-1.5">
+                      <span class="px-2 py-0.5 rounded-full bg-black/35 text-white tracking-tight">18:44:00</span>
+                      <span class="px-2 py-0.5 rounded-full bg-black/25 text-white/85 font-semibold text-[9px]">Бычье Л...</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-white">
+                      <span class="text-[9.5px] tracking-tight">LTE</span>
+                      <span class="px-1.5 py-0.5 rounded-[5px] bg-[#F2C94C] text-[#141414] font-extrabold text-[9px] leading-none">52</span>
+                    </div>
+                  </div>
+
+                  <div class="mt-2 flex items-center justify-start z-20">
+                    <div class="inline-flex items-center gap-2.5 pl-1.5 pr-3.5 py-1.5 rounded-full bg-[#0B0B0B] border border-white/10 shadow-xl">
+                      <div class="cover-art-box has-custom-cover w-9 h-9 rounded-full shrink-0 border border-white/10">
+                        <img class="cover-art-img" src="cover.jpg" alt="Mini Cover" />
+                        <div class="default-cover-art w-full h-full" style="background: linear-gradient(135deg, #BDBAB1 0%, #525B58 60%, #1B1E1D 100%);"></div>
+                      </div>
+                      <div class="leading-tight pr-1">
+                        <div class="font-display text-[11.5px] font-bold text-white">Бычье Лыко</div>
+                        <div class="text-[9.5px] text-white/60">Протоприкус</div>
+                      </div>
+                      <div class="mini-wave ml-0.5"><span></span><span></span><span></span></div>
+                    </div>
+                  </div>
+
+                  <div id="lyricsViewport" class="lyrics-viewport">
+                    <div id="lyricsTrack" class="lyrics-track">
+                      <div class="lyric-line" data-idx="0">Приуныли, ждём развязки</div>
+                      <div class="lyric-line" data-idx="1">— Алё? Пару дней на всё</div>
+                      <div class="lyric-line" data-idx="2">— Кто ответственность несёт?</div>
+                      <div class="lyric-line" data-idx="3">Сколько раз мы их искали</div>
+                      <div class="lyric-line" data-idx="4">Всё напрасно — мы устали</div>
+                      <div class="lyric-line" data-idx="5">— Пару дней на всё</div>
+                      <div class="lyric-line" data-idx="6">Ни одна служба не спасёт</div>
+                      <div class="lyric-line" data-idx="7">Преобладает метод тыка</div>
+                      <div class="lyric-line" data-idx="8">Расцветает бычье лыко</div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-2.5 mt-1">
+                    <div class="w-[50px] h-[50px] rounded-[15px] flex items-center justify-center shrink-0" style="background: var(--control-light); color: var(--on-control);">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.5"/><rect x="14" y="4" width="4" height="16" rx="1.5"/></svg>
+                    </div>
+                    <div class="flex-1 h-[40px] rounded-full px-3.5 flex items-center" style="background: var(--pill-dark);">
+                      <div class="wavy-seek">
+                        <div class="wavy-inactive"></div>
+                        <div id="lyricsWaveClip" class="wavy-active-clip" style="width: 66%;">
+                          <svg class="wave-svg-track" viewBox="0 0 340 18" fill="none">
+                            <path d="M0 9 Q6 3 12 9 T24 9 T36 9 T48 9 T60 9 T72 9 T84 9 T96 9 T108 9 T120 9 T132 9 T144 9 T156 9 T168 9 T180 9 T192 9 T204 9 T216 9 T228 9 T240 9 T252 9 T264 9 T276 9 T288 9 T300 9 T312 9 T324 9 T336 9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                          </svg>
+                        </div>
+                        <div id="lyricsWaveThumb" class="wavy-thumb" style="left: 66%;"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-2 mt-2.5">
+                    <div class="w-[38px] h-[38px] rounded-full flex items-center justify-center shrink-0" style="background: var(--pill-dark); color: #FFFFFF;">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    </div>
+
+                    <div id="modeSwitcher" class="mode-switcher">
+                      <div class="mode-btn-bg"></div>
+                      <div class="mode-btn-bg"></div>
+                      <div class="mode-active-pill"></div>
+                      <div class="mode-label mode-label-synced relative">
+                        <span>Синхронизир<br/>ованный</span>
+                        <div id="syncBtnRipple" class="tap-ripple left-1/2 top-1/2"></div>
+                      </div>
+                      <div class="mode-label mode-label-static"><span>Статический</span></div>
+                    </div>
+
+                    <div class="w-[38px] h-[38px] rounded-full flex items-center justify-center shrink-0" style="background: var(--pill-dark); color: #FFFFFF;">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ======== SCENE 4 (12.2s–17.6s): BUILT-IN SOULSEEK DOWNLOADER ======== -->
+                <div id="subSoulseek" class="phone-subscreen px-3.5 pt-2.5 pb-3.5 justify-between" style="opacity: 0; pointer-events: none;">
+                  <div class="flex items-center justify-between text-[10px] font-bold px-1">
+                    <div class="flex items-center gap-1.5">
+                      <span class="px-2 py-0.5 rounded-full bg-black/35 text-white tracking-tight">18:45:12</span>
+                      <span class="px-2 py-0.5 rounded-full bg-black/25 text-white/85 font-semibold text-[9px]">Soulseek</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-white">
+                      <span class="text-[9.5px] tracking-tight">LTE</span>
+                      <span class="px-1.5 py-0.5 rounded-[5px] bg-[#F2C94C] text-[#141414] font-extrabold text-[9px] leading-none">52</span>
+                    </div>
+                  </div>
+
+                  <!-- Search Bar with Active Globe Toggle -->
+                  <div class="flex items-center gap-1.5 mt-2">
+                    <div class="flex-1 h-[40px] rounded-full pl-3 pr-1.5 flex items-center gap-2 border border-white/12" style="background: var(--pill-dark);">
+                      <svg class="w-4 h-4 shrink-0" style="color: var(--control-light);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                      <span class="text-[11.5px] font-semibold text-white truncate">In Rainbows flac</span>
+                      <div class="ml-auto w-7 h-7 rounded-full flex items-center justify-center relative shrink-0" style="background: var(--control-light); color: var(--on-control);">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>
+                        <div id="globeBtnRipple" class="tap-ripple left-1/2 top-1/2"></div>
+                      </div>
+                    </div>
+                    <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style="background: var(--surface-chip);">
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </div>
+                  </div>
+
+                  <!-- Status + Sort & Filter Chips -->
+                  <div class="mt-2 rounded-[16px] px-3 py-2 flex items-center justify-between" style="background: var(--surface-chip);">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                      <div class="leading-tight">
+                        <div class="text-[10.5px] font-bold text-white">Soulseek подключён</div>
+                        <div class="text-[9px]" style="color: var(--text-muted);">По альбомам • Свободные слоты</div>
+                      </div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full text-[9px] font-extrabold" style="background: var(--control-light); color: var(--on-control);">FLAC</span>
+                  </div>
+
+                  <!-- Album Cards (Seeker Style) -->
+                  <div class="flex-1 flex flex-col gap-2 mt-2 overflow-hidden">
+                    <div id="slskCard1" class="rounded-[18px] p-2.5 flex items-center gap-2.5 border border-white/10" style="background: rgba(14,14,14,0.45);">
+                      <div class="w-10 h-10 rounded-[12px] flex items-center justify-center relative shrink-0" style="background: var(--control-light); color: var(--on-control);">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute bottom-0.5 right-0.5 border border-black"></span>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="text-[11.5px] font-bold text-white truncate">Radiohead - In Rainbows</div>
+                        <div class="text-[9.5px] truncate" style="color: var(--text-muted);">10 тр. • 312.5 MB • 3.8 MB/s</div>
+                        <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[8.5px] font-extrabold" style="background: var(--control-light); color: var(--on-control);">FLAC • 24bit/96kHz</span>
+                      </div>
+                      <div class="w-8 h-8 rounded-full flex items-center justify-center relative shrink-0" style="background: var(--surface-chip);">
+                        <svg id="slskDlIcon" class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <div id="dlBtnRipple" class="tap-ripple left-1/2 top-1/2"></div>
+                      </div>
+                    </div>
+
+                    <div id="slskCard2" class="rounded-[18px] p-2.5 flex items-center gap-2.5 border border-white/10" style="background: rgba(14,14,14,0.34);">
+                      <div class="w-10 h-10 rounded-[12px] flex items-center justify-center relative shrink-0" style="background: var(--surface-chip); color: var(--text-bright);">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute bottom-0.5 right-0.5 border border-black"></span>
+                      </div>
+                      <div class="min-w-0 flex-1">
+                        <div class="text-[11.5px] font-bold text-white truncate">In Rainbows (Disk 2)</div>
+                        <div class="text-[9.5px] truncate" style="color: var(--text-muted);">8 тр. • 218.0 MB • 2.4 MB/s</div>
+                        <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[8.5px] font-bold bg-white/10 text-white/90">FLAC • 16bit/44.1kHz</span>
+                      </div>
+                    </div>
+
+                    <!-- Live Download Progress Card -->
+                    <div id="slskDlCard" class="mt-auto rounded-[18px] p-3 border border-white/15" style="background: var(--pill-dark);">
+                      <div class="flex items-center justify-between text-[10.5px] font-bold">
+                        <span class="text-white truncate pr-2">04 Weird Fishes.flac</span>
+                        <span id="slskPct" class="font-mono" style="color: var(--control-light);">0%</span>
+                      </div>
+                      <div id="slskStatusText" class="text-[9.5px] mt-0.5" style="color: var(--text-muted);">3.8 MB/s • Music/YoPlayer</div>
+                      <div class="w-full h-1.5 rounded-full bg-white/15 mt-2 overflow-hidden">
+                        <div id="slskProgressBar" class="h-full rounded-full" style="width: 0%; background: var(--control-light);"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Floating Pill Nav Bar -->
+                  <div class="mt-2 h-[40px] rounded-full px-2 flex items-center justify-around" style="background: var(--pill-bar);">
+                    <span class="text-[10px] font-semibold text-white/50">Главная</span>
+                    <span class="px-3.5 py-1 rounded-full text-[10px] font-extrabold" style="background: var(--control-light); color: var(--on-control);">Поиск</span>
+                    <span class="text-[10px] font-semibold text-white/50">Медиатека</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <!-- ============================================================
+               SCENE 5 (17.6s–22.5s): FEATURE HIGHLIGHTS & OUTRO
+               ============================================================ -->
+          <section id="sceneOutro" class="scene-layer flex flex-col items-center justify-center px-6 text-center" style="opacity: 0;">
+            <p id="outroPhilosophy" class="font-display text-[17px] font-bold leading-snug mb-6 max-w-[310px]" style="color: var(--text-main);">
+              Никаких подписок.<br/>Только твоя медиатека.
+            </p>
+
+            <div id="outroIcon" class="yo-icon w-[112px] h-[112px] rounded-[31px] mb-5">
+              <img src="logo.png" alt="YoPlayer Logo" />
+            </div>
+
+            <h2 id="outroTitle" class="font-display text-[44px] font-extrabold tracking-tight leading-none" style="color: var(--text-bright);">
+              YoPlayer
+            </h2>
+
+            <div id="outroSub" class="mt-4 px-4 py-2 rounded-full text-[11px] font-bold border border-white/12" style="background: var(--surface-chip); color: var(--text-main);">
+              FLAC • USB ЦАП • Soulseek • 0 рекламы
+            </div>
+
+            <div id="outroRepo" class="mt-7 flex flex-col items-center gap-2.5">
+              <div class="shimmer-pill px-6 py-3 rounded-full border border-white/20 font-display text-[14.5px] font-extrabold tracking-tight" style="background: var(--pill-dark); color: var(--control-light);">
+                rdkgl.github.io/YoPlayer
+              </div>
+              <div class="text-[11.5px] font-semibold tracking-tight" style="color: var(--text-muted);">
+                GitHub: RDKGL/YoPlayer
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- BOTTOM TIMELINE SCRUBBER BAR -->
+    <footer class="studio-chrome w-full max-w-[960px] bg-white/[0.05] border border-white/10 rounded-3xl px-4 py-2.5">
+      <div class="flex items-center gap-3 mb-1.5">
+        <span id="timeCurrent" class="text-[11px] font-mono text-white/85 w-11 text-right shrink-0">00.0s</span>
+        <div id="timelineTrack" class="timeline-track flex-1">
+          <div class="timeline-rail">
+            <div id="timelineFill" class="timeline-fill"></div>
+            <div class="scene-marker" style="left: 8.57%;" title="Плеер (2.4s)"></div>
+            <div class="scene-marker" style="left: 22.14%;" title="Тексты (6.2s)"></div>
+            <div class="scene-marker" style="left: 70.00%;" title="Soulseek (19.6s)"></div>
+            <div class="scene-marker" style="left: 85.71%;" title="Финал (24.0s)"></div>
+            <div id="timelineThumb" class="timeline-thumb"></div>
+          </div>
+        </div>
+        <span class="text-[11px] font-mono text-white/45 w-11 shrink-0">28.0s</span>
+      </div>
+
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <button id="playPauseBtn" class="w-9 h-9 rounded-full bg-[#E6E6E3] hover:bg-white text-[#141414] flex items-center justify-center transition active:scale-95" title="Старт / Пауза (Space)">
+            <svg id="iconPause" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.5"/><rect x="14" y="4" width="4" height="16" rx="1.5"/></svg>
+            <svg id="iconPlay" class="w-4 h-4 hidden ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+          </button>
+          <button id="restartBtn" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/15 text-white flex items-center justify-center transition active:scale-95" title="Сначала (R)">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          </button>
+          <span id="activeSceneLabel" class="text-[11px] font-semibold text-white/65 ml-1 hidden sm:inline">Интро</span>
+        </div>
+
+        <div class="flex items-center gap-1 overflow-x-auto">
+          <button class="jump-btn px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/[0.06] hover:bg-white/15 text-white/80 transition" data-jump="0.0">Интро</button>
+          <button class="jump-btn px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/[0.06] hover:bg-white/15 text-white/80 transition" data-jump="2.5">Плеер</button>
+          <button class="jump-btn px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/[0.06] hover:bg-white/15 text-white/80 transition" data-jump="6.3">Тексты</button>
+          <button class="jump-btn px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/[0.06] hover:bg-white/15 text-white/80 transition" data-jump="19.7">Soulseek</button>
+          <button class="jump-btn px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/[0.06] hover:bg-white/15 text-white/80 transition" data-jump="24.1">Финал</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <audio id="promoAudio" src="promo_audio.m4a" preload="auto"></audio>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const DURATION = 28.0;
+      const CLIP_START_SEC = 1080.89; // 18:00.89 in Бычье Лыко.m4a
+      const STAGE_W = 396;
+      const STAGE_H = 704;
+
+      // Exact millisecond-accurate LRCLIB cues relative to CLIP_START_SEC (1080.89s)
+      const LYRIC_CUES = [
+        { time: 5.39,  idx: 0 }, // [18:06.28] Приуныли, ждём развязки
+        { time: 6.95,  idx: 1 }, // [18:07.84] — Алё? Пару дней на всё
+        { time: 8.54,  idx: 2 }, // [18:09.43] — Кто ответственность несёт?
+        { time: 10.19, idx: 3 }, // [18:11.08] Сколько раз мы их искали
+        { time: 11.78, idx: 4 }, // [18:12.67] Всё напрасно — мы устали
+        { time: 13.86, idx: 5 }, // [18:14.75] — Пару дней на всё
+        { time: 14.87, idx: 6 }, // [18:15.76] Ни одна служба не спасёт
+        { time: 16.47, idx: 7 }, // [18:17.36] Преобладает метод тыка
+        { time: 18.06, idx: 8 }  // [18:18.95] Расцветает бычье лыко
+      ];
+
+      const state = {
+        time: 0,
+        playing: true,
+        speed: 1,
+        muted: false,
+        audioUnlocked: false,
+        scrubbing: false,
+        recordMode: false,
+        lastRaf: null,
+        lastActiveLyric: -1,
+        lastSyncedState: false
+      };
+
+      const promoAudio = document.getElementById('promoAudio');
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const iconSoundOn = document.getElementById('iconSoundOn');
+      const iconSoundOff = document.getElementById('iconSoundOff');
+      const soundLabel = document.getElementById('soundLabel');
+
+      const stageWrapper = document.getElementById('stageWrapper');
+      const stageViewport = document.getElementById('stageViewport');
+      const stageCanvas = document.getElementById('stageCanvas');
+      const topProgressFill = document.getElementById('topProgressFill');
+
+      const sceneIntro = document.getElementById('sceneIntro');
+      const introIcon = document.getElementById('introIcon');
+      const introTitle = document.getElementById('introTitle');
+      const introSub = document.getElementById('introSub');
+      const introTagline = document.getElementById('introTagline');
+      const introChips = [
+        document.getElementById('introChip1'),
+        document.getElementById('introChip2'),
+        document.getElementById('introChip3')
+      ];
+
+      const scenePhone = document.getElementById('scenePhone');
+      const phoneFrame = document.getElementById('phoneFrame');
+      const subPlayer = document.getElementById('subPlayer');
+      const subLyrics = document.getElementById('subLyrics');
+      const subSoulseek = document.getElementById('subSoulseek');
+      const playerWaveClip = document.getElementById('playerWaveClip');
+      const playerWaveThumb = document.getElementById('playerWaveThumb');
+      const playerCurTime = document.getElementById('playerCurTime');
+      const lyricsBtnRipple = document.getElementById('lyricsBtnRipple');
+
+      const lyricsTopBadge = document.getElementById('lyricsTopBadge');
+      const soulseekTopBadge = document.getElementById('soulseekTopBadge');
+      const lyricsViewport = document.getElementById('lyricsViewport');
+      const lyricsTrack = document.getElementById('lyricsTrack');
+      const lyricLineEls = Array.from(document.querySelectorAll('.lyric-line'));
+      const lyricsWaveClip = document.getElementById('lyricsWaveClip');
+      const lyricsWaveThumb = document.getElementById('lyricsWaveThumb');
+      const modeSwitcher = document.getElementById('modeSwitcher');
+      const syncBtnRipple = document.getElementById('syncBtnRipple');
+
+      const globeBtnRipple = document.getElementById('globeBtnRipple');
+      const dlBtnRipple = document.getElementById('dlBtnRipple');
+      const slskCard1 = document.getElementById('slskCard1');
+      const slskCard2 = document.getElementById('slskCard2');
+      const slskDlCard = document.getElementById('slskDlCard');
+      const slskPct = document.getElementById('slskPct');
+      const slskStatusText = document.getElementById('slskStatusText');
+      const slskProgressBar = document.getElementById('slskProgressBar');
+
+      const sceneOutro = document.getElementById('sceneOutro');
+      const outroPhilosophy = document.getElementById('outroPhilosophy');
+      const outroIcon = document.getElementById('outroIcon');
+      const outroTitle = document.getElementById('outroTitle');
+      const outroSub = document.getElementById('outroSub');
+      const outroRepo = document.getElementById('outroRepo');
+
+      const timeCurrent = document.getElementById('timeCurrent');
+      const timelineTrack = document.getElementById('timelineTrack');
+      const timelineFill = document.getElementById('timelineFill');
+      const timelineThumb = document.getElementById('timelineThumb');
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const iconPause = document.getElementById('iconPause');
+      const iconPlay = document.getElementById('iconPlay');
+      const restartBtn = document.getElementById('restartBtn');
+      const activeSceneLabel = document.getElementById('activeSceneLabel');
+      const coverInput = document.getElementById('coverInput');
+      const uploadCoverBtn = document.getElementById('uploadCoverBtn');
+      const recordModeBtn = document.getElementById('recordModeBtn');
+      const exitRecordBtn = document.getElementById('exitRecordBtn');
+      const toastBox = document.getElementById('toastBox');
+      const toastText = document.getElementById('toastText');
+      let toastTimer = null;
+
+      const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const prog = (t, start, dur) => clamp((t - start) / dur, 0, 1);
+
+      function easeOutCubic(t) { t = clamp(t, 0, 1); return 1 - Math.pow(1 - t, 3); }
+      function easeInOutCubic(t) { t = clamp(t, 0, 1); return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+      function easeSpring(t, overshoot = 1.45) {
+        t = clamp(t, 0, 1);
+        const c1 = overshoot;
+        const c3 = c1 + 1;
+        return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+      }
+
+      function fitStage() {
+        const rect = stageWrapper.getBoundingClientRect();
+        const pad = state.recordMode ? 0 : 8;
+        const availW = Math.max(120, rect.width - pad);
+        const availH = Math.max(200, rect.height - pad);
+        const scale = Math.min(availW / STAGE_W, availH / STAGE_H);
+        stageViewport.style.width = `${Math.floor(STAGE_W * scale)}px`;
+        stageViewport.style.height = `${Math.floor(STAGE_H * scale)}px`;
+        stageCanvas.style.transform = `scale(${scale})`;
+      }
+
+      window.addEventListener('resize', fitStage);
+      if (typeof ResizeObserver !== 'undefined') new ResizeObserver(fitStage).observe(stageWrapper);
+      fitStage();
+
+      function updateRipple(el, t, start, dur = 0.42) {
+        const p = prog(t, start, dur);
+        if (p <= 0 || p >= 1) { el.style.opacity = '0'; return; }
+        const e = easeOutCubic(p);
+        el.style.opacity = ((1 - p) * 0.92).toFixed(3);
+        el.style.transform = `translate3d(-50%, -50%, 0) scale(${lerp(0.35, 1.58, e).toFixed(3)})`;
+      }
+
+      function renderTimeline(t) {
+        topProgressFill.style.transform = `scaleX(${clamp(t / DURATION, 0, 1).toFixed(4)})`;
+
+        // -------- SCENE 1 (0.0s–2.4s): INTRO --------
+        if (t < 2.75) {
+          const exit = easeInOutCubic(prog(t, 2.12, 0.36));
+          sceneIntro.style.opacity = (1 - exit).toFixed(3);
+          sceneIntro.style.transform = `translate3d(0, ${(-28 * exit).toFixed(1)}px, 0) scale(${lerp(1, 0.9, exit).toFixed(3)})`;
+
+          const iconS = easeSpring(prog(t, 0.06, 0.56), 1.5);
+          introIcon.style.opacity = clamp(prog(t, 0.04, 0.18), 0, 1).toFixed(3);
+          introIcon.style.transform = `scale(${lerp(0.35, 1, iconS).toFixed(3)})`;
+
+          const titleP = easeOutCubic(prog(t, 0.38, 0.42));
+          introTitle.style.opacity = titleP.toFixed(3);
+          introTitle.style.transform = `translate3d(0, ${lerp(22, 0, titleP).toFixed(1)}px, 0)`;
+
+          const subP = easeOutCubic(prog(t, 0.55, 0.4));
+          introSub.style.opacity = subP.toFixed(3);
+          introSub.style.transform = `translate3d(0, ${lerp(16, 0, subP).toFixed(1)}px, 0)`;
+
+          const tagP = easeOutCubic(prog(t, 0.68, 0.4));
+          introTagline.style.opacity = tagP.toFixed(3);
+          introTagline.style.transform = `translate3d(0, ${lerp(12, 0, tagP).toFixed(1)}px, 0)`;
+
+          introChips.forEach((chip, idx) => {
+            const cp = easeSpring(prog(t, 0.80 + idx * 0.12, 0.45), 1.25);
+            chip.style.opacity = clamp(prog(t, 0.80 + idx * 0.12, 0.18), 0, 1).toFixed(3);
+            chip.style.transform = `translate3d(0, ${lerp(20, 0, cp).toFixed(1)}px, 0) scale(${lerp(0.86, 1, cp).toFixed(3)})`;
+          });
+        } else {
+          sceneIntro.style.opacity = '0';
+        }
+
+        // -------- SCENES 2, 3 & 4 (2.4s–24.0s): 3D PHONE --------
+        if (t >= 2.25 && t <= 24.35) {
+          const enter = easeOutCubic(prog(t, 2.35, 0.72));
+          const settle = easeInOutCubic(prog(t, 3.05, 0.95));
+          const morphLyrics = easeInOutCubic(prog(t, 6.08, 0.44));   // Player -> Lyrics
+          const morphSlsk = easeInOutCubic(prog(t, 19.45, 0.46));    // Lyrics -> Soulseek
+          const exit = easeInOutCubic(prog(t, 23.68, 0.44));
+
+          const phoneAlpha = clamp(prog(t, 2.35, 0.22) * (1 - exit), 0, 1);
+          scenePhone.style.opacity = phoneAlpha.toFixed(3);
+
+          const rotY = lerp(-15, 0, settle) + lerp(0, 6, morphSlsk * (1 - prog(t, 20.0, 0.8))) + exit * 10;
+          const rotX = lerp(9, 0, settle) - exit * 6;
+          const phoneY = lerp(95, 0, enter) + lerp(0, 14, morphLyrics) + exit * 90;
+          const phoneScale = lerp(0.85, 0.96, enter) + lerp(0, 0.015, morphLyrics) - exit * 0.12;
+
+          phoneFrame.style.transform =
+            `translate3d(0, ${phoneY.toFixed(1)}px, 0) ` +
+            `rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) ` +
+            `scale(${phoneScale.toFixed(4)})`;
+
+          // Subscreen A: Now Playing (2.4s–6.2s)
+          if (morphLyrics < 0.995) {
+            subPlayer.style.opacity = (1 - morphLyrics).toFixed(3);
+            subPlayer.style.transform = `translate3d(0, ${(-18 * morphLyrics).toFixed(1)}px, 0) scale(${lerp(1, 0.96, morphLyrics).toFixed(3)})`;
+
+            const trackPos = CLIP_START_SEC + t;
+            const pct = clamp((trackPos / 1239.4) * 100, 0, 100);
+            playerWaveClip.style.width = `${pct.toFixed(2)}%`;
+            playerWaveThumb.style.left = `${pct.toFixed(2)}%`;
+
+            const sec = Math.floor(trackPos);
+            const timeStr = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+            if (playerCurTime.textContent !== timeStr) playerCurTime.textContent = timeStr;
+
+            updateRipple(lyricsBtnRipple, t, 5.80, 0.40);
+          } else {
+            subPlayer.style.opacity = '0';
+          }
+
+          // Subscreen B: Animated Online Lyrics (6.2s–19.6s) — Full Chorus in Exact Sync!
+          if (morphLyrics > 0.005 && morphSlsk < 0.995) {
+            const lyrAlpha = morphLyrics * (1 - morphSlsk);
+            subLyrics.style.opacity = lyrAlpha.toFixed(3);
+            subLyrics.style.transform = `translate3d(0, ${((1 - morphLyrics) * 24 - morphSlsk * 18).toFixed(1)}px, 0) scale(${lerp(0.96, 1, morphLyrics).toFixed(3)})`;
+
+            const lPct = clamp(((CLIP_START_SEC + t) / 1239.4) * 100, 0, 100);
+            lyricsWaveClip.style.width = `${lPct.toFixed(2)}%`;
+            lyricsWaveThumb.style.left = `${lPct.toFixed(2)}%`;
+
+            updateRipple(syncBtnRipple, t, 6.80, 0.40);
+
+            const isSynced = t >= 6.84;
+            if (isSynced !== state.lastSyncedState) {
+              state.lastSyncedState = isSynced;
+              modeSwitcher.classList.toggle('is-synced', isSynced);
+              lyricsViewport.classList.toggle('lyrics-synced', isSynced);
+            }
+
+            const badgeP = easeSpring(prog(t, 6.90, 0.48), 1.3);
+            const badgeAlpha = clamp(prog(t, 6.90, 0.2) * (1 - morphSlsk), 0, 1);
+            lyricsTopBadge.style.opacity = badgeAlpha.toFixed(3);
+            lyricsTopBadge.style.transform = `translate3d(-50%, ${lerp(-14, 0, badgeP).toFixed(1)}px, 0) scale(${lerp(0.88, 1, badgeP).toFixed(3)})`;
+
+            let activeIdx = 0;
+            let smoothIdx = 0;
+            for (let i = 0; i < LYRIC_CUES.length; i++) {
+              if (t >= LYRIC_CUES[i].time) {
+                activeIdx = LYRIC_CUES[i].idx;
+                smoothIdx = i === 0 ? LYRIC_CUES[0].idx : lerp(LYRIC_CUES[i - 1].idx, LYRIC_CUES[i].idx, easeOutCubic(prog(t, LYRIC_CUES[i].time, 0.36)));
+              }
+            }
+            if (activeIdx !== state.lastActiveLyric) {
+              state.lastActiveLyric = activeIdx;
+              lyricLineEls.forEach((el, idx) => el.classList.toggle('active', idx === activeIdx));
+            }
+
+            const syncBlend = easeInOutCubic(prog(t, 6.86, 0.44));
+            const vpCenter = (lyricsViewport.clientHeight || 360) * 0.46;
+            const floorIdx = Math.floor(smoothIdx);
+            const targetLine = lyricLineEls[floorIdx] || lyricLineEls[0];
+            const nextLine = lyricLineEls[Math.min(lyricLineEls.length - 1, floorIdx + 1)] || targetLine;
+            const lineCenterY = lerp(targetLine.offsetTop + targetLine.offsetHeight / 2, nextLine.offsetTop + nextLine.offsetHeight / 2, smoothIdx - floorIdx);
+            lyricsTrack.style.transform = `translate3d(0, ${lerp(18, vpCenter - lineCenterY, syncBlend).toFixed(1)}px, 0)`;
+          } else {
+            subLyrics.style.opacity = '0';
+            lyricsTopBadge.style.opacity = '0';
+          }
+
+          // Subscreen C: Built-in Soulseek Album Search & Download (19.6s–24.0s)
+          if (morphSlsk > 0.005) {
+            subSoulseek.style.opacity = morphSlsk.toFixed(3);
+            subSoulseek.style.transform = `translate3d(0, ${((1 - morphSlsk) * 24).toFixed(1)}px, 0) scale(${lerp(0.96, 1, morphSlsk).toFixed(3)})`;
+
+            const sbP = easeSpring(prog(t, 19.65, 0.48), 1.3);
+            const sbAlpha = clamp(prog(t, 19.65, 0.2) * (1 - exit), 0, 1);
+            soulseekTopBadge.style.opacity = sbAlpha.toFixed(3);
+            soulseekTopBadge.style.transform = `translate3d(-50%, ${lerp(-14, 0, sbP).toFixed(1)}px, 0) scale(${lerp(0.88, 1, sbP).toFixed(3)})`;
+
+            updateRipple(globeBtnRipple, t, 19.90, 0.40);
+            updateRipple(dlBtnRipple, t, 20.65, 0.42);
+
+            const c1 = easeOutCubic(prog(t, 20.05, 0.35));
+            slskCard1.style.opacity = c1.toFixed(3);
+            slskCard1.style.transform = `translate3d(0, ${lerp(14, 0, c1).toFixed(1)}px, 0)`;
+
+            const c2 = easeOutCubic(prog(t, 20.22, 0.35));
+            slskCard2.style.opacity = c2.toFixed(3);
+            slskCard2.style.transform = `translate3d(0, ${lerp(14, 0, c2).toFixed(1)}px, 0)`;
+
+            const dlShow = easeSpring(prog(t, 20.80, 0.45), 1.15);
+            slskDlCard.style.opacity = clamp(prog(t, 20.80, 0.2), 0, 1).toFixed(3);
+            slskDlCard.style.transform = `translate3d(0, ${lerp(18, 0, dlShow).toFixed(1)}px, 0)`;
+
+            const dlPctVal = Math.round(easeInOutCubic(prog(t, 20.95, 2.3)) * 100);
+            slskProgressBar.style.width = `${dlPctVal}%`;
+            slskPct.textContent = `${dlPctVal}%`;
+            slskStatusText.textContent = dlPctVal >= 100
+              ? '✓ Сохранено в Music/YoPlayer • В медиатеке!'
+              : '3.8 MB/s • Music/YoPlayer/In Rainbows';
+          } else {
+            subSoulseek.style.opacity = '0';
+            soulseekTopBadge.style.opacity = '0';
+          }
+        } else {
+          scenePhone.style.opacity = '0';
+        }
+
+        // -------- SCENE 5 (24.0s–28.0s): OUTRO --------
+        if (t >= 23.85) {
+          const fadeIn = clamp(prog(t, 23.95, 0.28), 0, 1);
+          sceneOutro.style.opacity = fadeIn.toFixed(3);
+
+          const philP = easeOutCubic(prog(t, 24.02, 0.46));
+          outroPhilosophy.style.opacity = philP.toFixed(3);
+          outroPhilosophy.style.transform = `translate3d(0, ${lerp(18, 0, philP).toFixed(1)}px, 0)`;
+
+          const iconS = easeSpring(prog(t, 24.22, 0.56), 1.4);
+          outroIcon.style.opacity = clamp(prog(t, 24.20, 0.2), 0, 1).toFixed(3);
+          outroIcon.style.transform = `scale(${lerp(0.42, 1, iconS).toFixed(3)})`;
+
+          const titleP = easeOutCubic(prog(t, 24.52, 0.42));
+          outroTitle.style.opacity = titleP.toFixed(3);
+          outroTitle.style.transform = `translate3d(0, ${lerp(18, 0, titleP).toFixed(1)}px, 0)`;
+
+          const subP = easeOutCubic(prog(t, 24.75, 0.42));
+          outroSub.style.opacity = subP.toFixed(3);
+          outroSub.style.transform = `translate3d(0, ${lerp(16, 0, subP).toFixed(1)}px, 0)`;
+
+          const repoP = easeSpring(prog(t, 25.05, 0.52), 1.25);
+          outroRepo.style.opacity = clamp(prog(t, 25.05, 0.22), 0, 1).toFixed(3);
+          outroRepo.style.transform = `translate3d(0, ${lerp(24, 0, repoP).toFixed(1)}px, 0) scale(${lerp(0.9, 1, repoP).toFixed(3)})`;
+        } else {
+          sceneOutro.style.opacity = '0';
+        }
+
+        const pct = clamp((t / DURATION) * 100, 0, 100);
+        timelineFill.style.width = `${pct.toFixed(2)}%`;
+        timelineThumb.style.left = `${pct.toFixed(2)}%`;
+        timeCurrent.textContent = `${t < 10 ? '0' : ''}${t.toFixed(1)}s`;
+
+        if (t < 2.4) activeSceneLabel.textContent = 'Интро';
+        else if (t < 6.2) activeSceneLabel.textContent = 'Плеер';
+        else if (t < 19.6) activeSceneLabel.textContent = 'Тексты';
+        else if (t < 24.0) activeSceneLabel.textContent = 'Soulseek';
+        else activeSceneLabel.textContent = 'Финал';
+      }
+
+      function updateSoundUI() {
+        iconSoundOn.classList.toggle('hidden', state.muted);
+        iconSoundOff.classList.toggle('hidden', !state.muted);
+        soundLabel.textContent = state.muted ? 'Без звука' : 'Звук';
+        promoAudio.muted = state.muted;
+      }
+
+      function syncAudio(forceSeek = false) {
+        if (!promoAudio) return;
+        promoAudio.playbackRate = state.speed;
+        promoAudio.muted = state.muted;
+        if (forceSeek && promoAudio.readyState >= 1) {
+          try { promoAudio.currentTime = clamp(state.time, 0, DURATION - 0.05); } catch (_) {}
+        }
+        if (state.playing && !state.scrubbing) {
+          const p = promoAudio.play();
+          if (p && typeof p.then === 'function') {
+            p.then(() => { state.audioUnlocked = true; }).catch(() => {
+              state.audioUnlocked = false;
+            });
+          }
+        } else {
+          promoAudio.pause();
+        }
+      }
+
+      function updatePlayStateUI() {
+        iconPause.classList.toggle('hidden', !state.playing);
+        iconPlay.classList.toggle('hidden', state.playing);
+        stageCanvas.classList.toggle('paused-anims', !state.playing);
+        syncAudio(true);
+      }
+
+      function tick(now) {
+        if (state.lastRaf === null) state.lastRaf = now;
+        const dt = Math.min(0.05, (now - state.lastRaf) / 1000);
+        state.lastRaf = now;
+        if (state.playing && !state.scrubbing) {
+          if (state.audioUnlocked && !promoAudio.paused && !promoAudio.ended && promoAudio.readyState >= 2) {
+            state.time = promoAudio.currentTime;
+            if (state.time >= DURATION - 0.03) {
+              state.time = 0;
+              promoAudio.currentTime = 0;
+            }
+          } else {
+            state.time += dt * state.speed;
+            if (state.time >= DURATION) {
+              state.time = state.time % DURATION;
+              if (promoAudio.readyState >= 1) {
+                try { promoAudio.currentTime = state.time; } catch (_) {}
+              }
+            }
+          }
+        }
+        renderTimeline(state.time);
+        requestAnimationFrame(tick);
+      }
+
+      promoAudio.addEventListener('ended', () => {
+        if (state.playing) {
+          state.time = 0;
+          promoAudio.currentTime = 0;
+          promoAudio.play().catch(() => {});
+        }
+      });
+
+      // Auto-unlock audio on first user gesture if browser blocked initial autoplay
+      function unlockOnGesture() {
+        if (!state.audioUnlocked && state.playing && !state.muted) {
+          syncAudio(true);
+        }
+      }
+      window.addEventListener('pointerdown', unlockOnGesture, { once: true });
+
+      function showToast(msg) {
+        toastText.textContent = msg;
+        toastBox.style.opacity = '1';
+        toastBox.style.transform = 'translate(-50%, 0)';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastBox.style.opacity = '0';
+          toastBox.style.transform = 'translate(-50%, -8px)';
+        }, 2800);
+      }
+
+      soundToggleBtn.addEventListener('click', () => {
+        state.muted = !state.muted;
+        updateSoundUI();
+        if (!state.muted) syncAudio(true);
+      });
+
+      playPauseBtn.addEventListener('click', () => { state.playing = !state.playing; updatePlayStateUI(); });
+      restartBtn.addEventListener('click', () => { state.time = 0; state.playing = true; updatePlayStateUI(); });
+
+      function scrubTo(clientX) {
+        const rect = timelineTrack.getBoundingClientRect();
+        state.time = clamp((clientX - rect.left) / rect.width, 0, 1) * DURATION;
+        if (promoAudio.readyState >= 1) {
+          try { promoAudio.currentTime = state.time; } catch (_) {}
+        }
+        renderTimeline(state.time);
+      }
+      timelineTrack.addEventListener('pointerdown', (e) => { state.scrubbing = true; promoAudio.pause(); timelineTrack.setPointerCapture(e.pointerId); scrubTo(e.clientX); });
+      timelineTrack.addEventListener('pointermove', (e) => { if (state.scrubbing) scrubTo(e.clientX); });
+      timelineTrack.addEventListener('pointerup', () => { state.scrubbing = false; syncAudio(true); });
+      timelineTrack.addEventListener('pointercancel', () => { state.scrubbing = false; syncAudio(true); });
+
+      document.querySelectorAll('.jump-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.time = clamp(parseFloat(btn.dataset.jump || '0'), 0, DURATION);
+          syncAudio(true);
+          renderTimeline(state.time);
+        });
+      });
+
+      const themeBtns = Array.from(document.querySelectorAll('.theme-btn'));
+      themeBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.body.setAttribute('data-theme', btn.dataset.themePick);
+          themeBtns.forEach((b) => b.classList.toggle('active', b === btn));
+        });
+      });
+
+      const speedBtns = Array.from(document.querySelectorAll('.speed-btn'));
+      speedBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.speed = parseFloat(btn.dataset.speed || '1');
+          promoAudio.playbackRate = state.speed;
+          speedBtns.forEach((b) => {
+            b.className = b === btn
+              ? 'speed-btn px-2 py-1 rounded-full bg-white/20 text-white transition'
+              : 'speed-btn px-2 py-1 rounded-full text-white/60 hover:text-white transition';
+          });
+        });
+      });
+
+      uploadCoverBtn.addEventListener('click', () => coverInput.click());
+      coverInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        document.querySelectorAll('.cover-art-img').forEach((img) => { img.src = url; });
+        document.querySelectorAll('.cover-art-box').forEach((box) => { box.classList.add('has-custom-cover'); });
+        showToast('Обложка обновлена в плеере и мини-плеере');
+      });
+
+      function setRecordMode(enabled) {
+        state.recordMode = enabled;
+        document.body.classList.toggle('record-mode', enabled);
+        if (enabled) { state.time = 0; state.playing = true; updatePlayStateUI(); }
+        requestAnimationFrame(fitStage);
+      }
+      recordModeBtn.addEventListener('click', () => setRecordMode(true));
+      exitRecordBtn.addEventListener('click', () => setRecordMode(false));
+
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && state.recordMode) setRecordMode(false);
+        else if (e.code === 'Space') { e.preventDefault(); state.playing = !state.playing; updatePlayStateUI(); }
+        else if (e.code === 'KeyR') { state.time = 0; state.playing = true; updatePlayStateUI(); }
+        else if (e.code === 'KeyM') { state.muted = !state.muted; updateSoundUI(); if (!state.muted) syncAudio(true); }
+      });
+
+      updateSoundUI();
+      renderTimeline(0);
+      syncAudio(true);
+      requestAnimationFrame(tick);
+
+      // Deterministic frame-by-frame capture API for headless MP4 rendering
+      window.__yoStudio = {
+        duration: DURATION,
+        enterCapture(theme) {
+          if (theme) document.body.setAttribute('data-theme', theme);
+          state.playing = false;
+          state.muted = true;
+          promoAudio.pause();
+          state.recordMode = true;
+          document.body.classList.add('record-mode');
+          stageCanvas.classList.remove('paused-anims');
+          fitStage();
+          renderTimeline(0);
+        },
+        renderAt(t) {
+          state.time = t;
+          // Drive wavy seekbar phase deterministically with t so capture is butter-smooth
+          const waveShift = -((t * 21) % 24);
+          document.querySelectorAll('.wave-svg-track').forEach((el) => {
+            el.style.animation = 'none';
+            el.style.transform = `translate3d(${waveShift.toFixed(2)}px, 0, 0)`;
+          });
+          renderTimeline(t);
+        }
+      };
+    })();
+  </script>
+</body>
+</html>

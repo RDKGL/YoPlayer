@@ -1,0 +1,105 @@
+name: Release YoPlayer
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-yoplayer
+  cancel-in-progress: false
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compute version
+        id: version
+        run: |
+          BASE_VERSION="$(grep '^APP_VERSION_NAME=' gradle.properties | cut -d= -f2)"
+          BASE_CODE="$(grep '^APP_VERSION_CODE=' gradle.properties | cut -d= -f2)"
+          TAG_NAME="v${BASE_VERSION}"
+          echo "name=$BASE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "code=$BASE_CODE" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Set up CI keystore
+        env:
+          CI_KEYSTORE_B64: ${{ secrets.CI_KEYSTORE_B64 }}
+          CI_KEYSTORE_PASSWORD: ${{ secrets.CI_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$CI_KEYSTORE_B64" ] && [ -n "$CI_KEYSTORE_PASSWORD" ]; then
+            KEYSTORE_PASSWORD="$CI_KEYSTORE_PASSWORD"
+            printf '%s' "$CI_KEYSTORE_B64" | base64 -d > yoplayer-ci.jks
+            {
+              echo "storeFile=yoplayer-ci.jks"
+              echo "storePassword=$KEYSTORE_PASSWORD"
+              echo "keyAlias=yoplayer-ci-key"
+              echo "keyPassword=$KEYSTORE_PASSWORD"
+            } > keystore.properties
+          else
+            {
+              echo "storeFile=yoplayer-release.jks"
+              echo "storePassword=yoplayer123"
+              echo "keyAlias=yoplayer-key"
+              echo "keyPassword=yoplayer123"
+            } > keystore.properties
+          fi
+
+      - name: Build release APKs
+        run: >
+          ./gradlew :app:assembleRelease
+          -Pyoplayer.enableAbiSplits=true
+          -PAPP_VERSION_NAME=${{ steps.version.outputs.name }}
+          -PAPP_VERSION_CODE=${{ steps.version.outputs.code }}
+
+      - name: Verify and rename split APKs
+        run: |
+          BUILD_TOOLS_VERSION="$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -n 1)"
+          mkdir -p release-apks
+          for abi in arm64-v8a armeabi-v7a; do
+            apk="app/build/outputs/apk/release/app-$abi-release.apk"
+            if [ -f "$apk" ]; then
+              "$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION/apksigner" verify --verbose "$apk" || true
+              cp "$apk" "release-apks/YoPlayer-v${{ steps.version.outputs.name }}-$abi.apk"
+            fi
+          done
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: YoPlayer-v${{ steps.version.outputs.name }}-APKs
+          path: release-apks/*.apk
+
+      - name: Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          TITLE="YoPlayer v${{ steps.version.outputs.name }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists. Uploading updated APKs..."
+            gh release upload "$TAG" release-apks/*.apk --clobber
+          else
+            echo "Creating new release $TAG..."
+            gh release create "$TAG" --generate-notes --title "$TITLE" release-apks/*.apk
+          fi
