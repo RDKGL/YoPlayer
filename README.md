@@ -1,14 +1,17 @@
 <p align="center">
-  <img src="assets/logo.png" alt="YoPlayer Logo" height="220"/>
+  <img src="assets/banner.png" alt="YoPlayer — Material 3 Expressive Audio Player" width="100%" />
 </p>
 
 <h1 align="center">YoPlayer</h1>
 
 <p align="center">
-  <b>A modern, local-first Android audio player with Bit-Perfect USB DAC support, AutoEQ headphone correction, and smart recommendations.</b>
+  <b>A modern, local-first Android Hi-Res audio player with Bit-Perfect USB DAC output, built-in Soulseek FLAC search, synced online lyrics, and Material 3 Expressive design.</b>
 </p>
 
 <p align="center">
+  <a href="https://rdkgl.github.io/YoPlayer">
+    <img src="https://img.shields.io/badge/Website-rdkgl.github.io%2FYoPlayer-141414?style=for-the-badge&logo=githubpages&logoColor=white" alt="Website">
+  </a>
   <a href="https://github.com/RDKGL/YoPlayer/releases/latest">
     <img src="https://img.shields.io/github/v/release/RDKGL/YoPlayer?include_prereleases&logo=github&style=for-the-badge&label=Latest%20Release" alt="Latest Release">
   </a>
@@ -19,48 +22,37 @@
   </a>
 </p>
 
-<p align="center">
-  <img src="assets/1.jpg" alt="YoPlayer Screen 1" width="205"/>
-  <img src="assets/2.jpg" alt="YoPlayer Screen 2" width="205"/>
-  <img src="assets/3.jpg" alt="YoPlayer Screen 3" width="205"/>
-  <img src="assets/4.jpg" alt="YoPlayer Screen 4" width="205"/>
-</p>
-
 ---
 
 ## 🎵 Overview
 
-**YoPlayer** (`com.yoopen.player`) is an open-source, audiophile-grade local audio player for Android built with Jetpack Compose and Material 3 Expressive guidelines. Designed for speed, flexibility, and pure high-resolution sound quality.
+**YoPlayer** (`com.yoopen.player`) is a free, open-source, audiophile-grade local music player for Android built with Jetpack Compose and **Material 3 Expressive** guidelines. No subscriptions, no ads, no tracking — just your lossless library, direct hardware USB DAC output, and built-in P2P FLAC discovery.
 
 ---
 
 ## ✨ Key Features
 
 ### 🎧 Audiophile Sound Engine & Bit-Perfect USB DAC
-- **Direct USB DAC Output 2.0**: Native C++ lock-free Isochronous PCM ring buffer streaming raw audio directly to external USB DACs, bypassing the Android system audio mixer. Features dynamic clock synchronization (44.1 kHz, 48 kHz, 96 kHz, 192 kHz) and USB Alternate Setting audio activation.
-- **Audio Inspector Sheet**: Tap the format badge in Now Playing to inspect track quality metrics (codec, sample rate, bit depth, bitrate, LOSSLESS and HI-RES badges), the complete signal path (Source ➔ Audio Engine ➔ Output Device), and DAC hardware master gain slider.
-- **AutoEQ Headphone Integration**: Built-in target compensation profiles for popular headphones (Sony WH-1000XM4/XM5, Sennheiser HD600/650, AirPods Pro/Max, KZ ZSN Pro, Audio-Technica ATH-M50x, Galaxy Buds, etc.) powered by Harman Target curves.
-- **10-Band Graphic Equalizer**: Advanced audio processing with Bass Boost, Virtualizer, and Loudness Enhancer.
+- **Direct USB DAC Output 2.0**: Native C++ lock-free Isochronous PCM ring buffer (`USBDEVFS`) streaming raw audio directly to external USB DACs, bypassing the Android system mixer. Supports 16-bit and 24-bit PCM, dynamic sample-rate switching (`44.1 / 48 / 96 / 192 kHz`), and clean hot-plug lifecycle handling.
+- **Audio Inspector Sheet**: Tap the format badge in Now Playing to inspect codec, sample rate, bit depth, bitrate (`LOSSLESS` / `HI-RES` badges), full signal path (`Source ➔ Audio Engine ➔ Output Device`), and hardware DAC master gain.
+- **AutoEQ Headphone Correction**: Built-in Harman Target compensation profiles for popular headphones (Sony WH-1000XM4/XM5, Sennheiser HD600/650, AirPods Pro/Max, KZ ZSN Pro, Audio-Technica ATH-M50x, Galaxy Buds, and more).
+- **10-Band Graphic Equalizer**: Precision EQ with Bass Boost, Virtualizer, and Loudness Enhancer.
 
-### 🧠 Smart YoMix Queue & Library
-- **Intelligent YoMix Recommendation**: Smart dynamic queue generator balancing track engagement (play count & duration), favorite status, artist & genre similarity, recency penalty, and artist diversity spacing.
-- **Dynamic Auto-Queue**: Seamless auto-fill recommendations to keep playback flowing.
-- **Tag Editing & Lyrics**: Built-in ID3v2/FLAC metadata editor and synced LRC lyrics integration.
+### 🌐 Built-in Soulseek (Seeker-Style P2P Search & Downloads)
+- **Native Kotlin Soulseek Client**: Toggle the globe icon right in the Search bar to search the Soulseek P2P network without leaving YoPlayer.
+- **Album / Folder Grouping**: Search results are grouped into clean album cards showing track count, total size, format badge (`FLAC • 24bit/192kHz`, `320 kbps`), peer speed, and free-slot status.
+- **Selective Track Download & Sorting**: Open any album to download individual tracks or the entire folder; sort by quality, speed, free slots, or relevance, and filter by `FLAC / Lossless` or `320 kbps`.
+- **Downloads Manager & Auto-Library Scan**: Track live transfer progress, cancel/retry downloads, and save directly to `Music/YoPlayer` with automatic MediaStore indexing.
+
+### 🧠 Synced Lyrics, Smart YoMix & Library
+- **Online Synced Lyrics**: Automatic LRC lyrics fetching with smooth karaoke-style line highlighting and instant switching between **Synced** and **Static** modes.
+- **YoMix Orbital Discovery**: Smart daily mix and dynamic auto-queue balancing play engagement, favorites, artist/genre similarity, and diversity spacing.
+- **Built-in Tag Editor**: Edit ID3v2 and FLAC metadata directly inside the app.
 
 ### 🎨 Material 3 Expressive UI & Customization
-- **Cover Art Styles**: Choose between 4 distinct styles:
-  - **Standard**: Classic rounded corner rectangle (18 dp).
-  - **Vinyl**: Rotating vinyl record with groove textures and real-time spinning animation during playback.
-  - **Glow**: Dynamic ambient backlight aura that breathes to the music.
-  - **Circle**: Modern circular artwork.
-- **Player View Customization**:
-  - **Text Sizing**: Configurable Mini, Medium, and Large typography for track title and artist.
-  - **Title Alignment**: Left and Center alignment with balanced spacing.
-  - **Title Position**: Adjust track title placement Above or Below artwork.
-  - **Live Preview Customizer**: Real-time interactive customizer with automatic miniplayer collapsing.
-- **Ergonomic Button Layout**: Favorite heart button placed top next to title; Lyrics button placed in the bottom action bar.
-- **Dynamic Theming**: Album art palette extraction, OLED True-Black mode, and customizable navigation layouts.
-- **Instant Launch**: Optimized cold start without splash screen delays.
+- **4 Cover Art Styles**: **Standard** (rounded), **Vinyl** (spinning record), **Glow** (ambient breathing aura), and **Circle**.
+- **Expressive Player Controls**: Squircle/pill transport buttons, animated wavy seekbar, and a live preview customizer for typography size, title alignment, and artwork position.
+- **Dynamic Theming**: Material You palette extraction from album art, OLED True-Black mode, customizable navigation bar, and instant cold start without splash-screen delays.
 
 ---
 
